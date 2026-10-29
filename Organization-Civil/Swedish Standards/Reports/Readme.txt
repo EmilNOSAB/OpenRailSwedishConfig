@@ -1,0 +1,2 @@
+This blank folder can be used to store custom report style sheets. The custom reports defined in this folder will be
+shown in addition to the default reports read from the C:\Program Files\Bentley\...\Default\Reports product folder.

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RoadDefinitions xmlns="OpenRoads">
+  <RoadDefinition name="A (Autostrada ambito Extraurbano);2+2 corsie;90-140" maxSpeed="140" minSpeed="90" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.17"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.13"/>
+      <FrictionFactorTableEntry speed="100" frictionFactor="0.11"/>
+      <FrictionFactorTableEntry speed="120" frictionFactor="0.1"/>
+      <FrictionFactorTableEntry speed="140" frictionFactor="0.09"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+  <RoadDefinition name="A (Autostrada ambito Extraurbano);2+2 corsie;90-140" maxSpeed="140" minSpeed="90" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.17"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.13"/>
+      <FrictionFactorTableEntry speed="100" frictionFactor="0.11"/>
+      <FrictionFactorTableEntry speed="120" frictionFactor="0.1"/>
+      <FrictionFactorTableEntry speed="140" frictionFactor="0.09"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+  <RoadDefinition name="A (Autostrade ambito Extraurbano); 3+3 corsie ; 90-140" maxSpeed="140" minSpeed="90" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.17"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.13"/>
+      <FrictionFactorTableEntry speed="100" frictionFactor="0.11"/>
+      <FrictionFactorTableEntry speed="120" frictionFactor="0.1"/>
+      <FrictionFactorTableEntry speed="140" frictionFactor="0.09"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+  <RoadDefinition name="A (Autostrade ambito Urbano); 2+2 corsie; 80-140" maxSpeed="140" minSpeed="80" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.17"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.13"/>
+      <FrictionFactorTableEntry speed="100" frictionFactor="0.11"/>
+      <FrictionFactorTableEntry speed="120" frictionFactor="0.1"/>
+      <FrictionFactorTableEntry speed="140" frictionFactor="0.09"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+  <RoadDefinition name="A (Autostrade ambito Urbano) ); 3+3 corsie ; 80-140" maxSpeed="140" minSpeed="80" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.17"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.13"/>
+      <FrictionFactorTableEntry speed="100" frictionFactor="0.11"/>
+      <FrictionFactorTableEntry speed="120" frictionFactor="0.1"/>
+      <FrictionFactorTableEntry speed="140" frictionFactor="0.09"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+  <RoadDefinition name="B (Extraurbane Principali); 2+2 corsie ; 70-120" maxSpeed="120" minSpeed="70" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.17"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.13"/>
+      <FrictionFactorTableEntry speed="100" frictionFactor="0.11"/>
+      <FrictionFactorTableEntry speed="120" frictionFactor="0.1"/>
+      <FrictionFactorTableEntry speed="140" frictionFactor="0.09"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+  <RoadDefinition name="B (Extraurbane Principali); 3+3 corsie ; 70-120" maxSpeed="120" minSpeed="70" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.17"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.13"/>
+      <FrictionFactorTableEntry speed="100" frictionFactor="0.11"/>
+      <FrictionFactorTableEntry speed="120" frictionFactor="0.1"/>
+      <FrictionFactorTableEntry speed="140" frictionFactor="0.09"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+  <RoadDefinition name="C (Extraurbane Secondarie); C1; 60-100" maxSpeed="100" minSpeed="60" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.17"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.13"/>
+      <FrictionFactorTableEntry speed="100" frictionFactor="0.11"/>
+      <FrictionFactorTableEntry speed="120" frictionFactor="0.1"/>
+      <FrictionFactorTableEntry speed="140" frictionFactor="0.09"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+  <RoadDefinition name="C (Extraurbane Secondarie); C2; 60-100" maxSpeed="100" minSpeed="60" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.17"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.13"/>
+      <FrictionFactorTableEntry speed="100" frictionFactor="0.11"/>
+      <FrictionFactorTableEntry speed="120" frictionFactor="0.1"/>
+      <FrictionFactorTableEntry speed="140" frictionFactor="0.09"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+  <RoadDefinition name="D (Urbane di Scorrimento); 2+2 corsie ; 50-80" maxSpeed="80" minSpeed="50" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="25" frictionFactor="0.22"/>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.2"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.16"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+  <RoadDefinition name="D (Urbane di Scorrimento); 3+3 corsie ; 50-80" maxSpeed="80" minSpeed="50" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="25" frictionFactor="0.22"/>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.2"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.16"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+  <RoadDefinition name="E (Urbane di Quartiere); 1+1 corsie; 40-60" maxSpeed="60" minSpeed="40" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="25" frictionFactor="0.22"/>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.2"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.16"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+  <RoadDefinition name="F (Locali ambito Extraurbano); F1; 40-100" maxSpeed="100" minSpeed="40" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.17"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.13"/>
+      <FrictionFactorTableEntry speed="100" frictionFactor="0.11"/>
+      <FrictionFactorTableEntry speed="120" frictionFactor="0.1"/>
+      <FrictionFactorTableEntry speed="140" frictionFactor="0.09"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+  <RoadDefinition name="F (Locali ambito Extraurbano); F2; 40-100" maxSpeed="100" minSpeed="40" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.17"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.13"/>
+      <FrictionFactorTableEntry speed="100" frictionFactor="0.11"/>
+      <FrictionFactorTableEntry speed="120" frictionFactor="0.1"/>
+      <FrictionFactorTableEntry speed="140" frictionFactor="0.09"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+  <RoadDefinition name="F (Locali ambito Urbano); 2 corsie; 25-60" maxSpeed="60" minSpeed="25" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.17"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.13"/>
+      <FrictionFactorTableEntry speed="100" frictionFactor="0.11"/>
+      <FrictionFactorTableEntry speed="120" frictionFactor="0.1"/>
+      <FrictionFactorTableEntry speed="140" frictionFactor="0.09"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+  <RoadDefinition name="F (Locali ambito Urbano); 2 corsie + 2 stalli; 25-60" maxSpeed="60" minSpeed="25" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.17"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.13"/>
+      <FrictionFactorTableEntry speed="100" frictionFactor="0.11"/>
+      <FrictionFactorTableEntry speed="120" frictionFactor="0.1"/>
+      <FrictionFactorTableEntry speed="140" frictionFactor="0.09"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+  <RoadDefinition name="A (Autostrada) Singola Carregiata" maxSpeed="140" minSpeed="90" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.17"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.13"/>
+      <FrictionFactorTableEntry speed="100" frictionFactor="0.11"/>
+      <FrictionFactorTableEntry speed="120" frictionFactor="0.1"/>
+      <FrictionFactorTableEntry speed="140" frictionFactor="0.09"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+  <RoadDefinition name="Rampa" maxSpeed="60" minSpeed="25" accelerationRate="0.8" decelerationRate="0.8" allowSpeedChangeOnCurves="false" methodType="Italian">
+    <FrictionFactorTable>
+      <FrictionFactorTableEntry speed="25" frictionFactor="0.22"/>
+      <FrictionFactorTableEntry speed="40" frictionFactor="0.21"/>
+      <FrictionFactorTableEntry speed="60" frictionFactor="0.2"/>
+      <FrictionFactorTableEntry speed="80" frictionFactor="0.16"/>
+    </FrictionFactorTable>
+  </RoadDefinition>
+</RoadDefinitions>

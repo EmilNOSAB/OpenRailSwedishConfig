@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RightOfWayDeedPhraseCatalog xmlns="OpenRoads">
+  <PhraseCalculatedInserts>
+    <PhraseCalculatedInsert name="Deflection Degrees" text="[#DEFLECTION_DEGREES]" />
+    <PhraseCalculatedInsert name="Deflection Minutes" text="[#DEFLECTION_MINUTES]" />
+    <PhraseCalculatedInsert name="Deflection Seconds" text="[#DEFLECTION_SECONDS(1)]" />
+    <PhraseCalculatedInsert name="Compass Direction" text="[#COMPASS]" />
+    <PhraseCalculatedInsert name="Reference Alignment Name" text="[#REFERENCE_ALIGNMENT_NAME]" />
+    <PhraseCalculatedInsert name="Begin Station" text="[#BEGIN_STATION(3)]" />
+    <PhraseCalculatedInsert name="End Station" text="[#END_STATION(3)]" />
+    <PhraseCalculatedInsert name="Begin Offset" text="[#BEGIN_OFFSET(3)]" />
+    <PhraseCalculatedInsert name="End Offset" text="[#END_OFFSET(3)]" />
+    <PhraseCalculatedInsert name="Left/Right" text="[#TURN]" />
+    <PhraseCalculatedInsert name="Radius" text="[#RADIUS(3)]" />
+    <PhraseCalculatedInsert name="Line Bearing" text="[#LINE_BEARING]" />
+    <PhraseCalculatedInsert name="Line Bearing Verbose" text="[#VERBOSE_LINE_BEARING]" />
+    <PhraseCalculatedInsert name="Arc Begin Bearing" text="[#ARC_BEGIN_BEARING]" />
+    <PhraseCalculatedInsert name="Arc Begin Bearing Verbose" text="[#VERBOSE_ARC_BEGIN_BEARING]" />
+    <PhraseCalculatedInsert name="Arc End Bearing" text="[#ARC_END_BEARING]" />
+    <PhraseCalculatedInsert name="Arc End Bearing Verbose" text="[#VERBOSE_ARC_END_BEARING]" />
+    <PhraseCalculatedInsert name="Arc Delta Angle" text="[#ARC_DELTA_ANGLE]" />
+    <PhraseCalculatedInsert name="Arc Tangent Length" text="[#ARC_TANGENT_LENGTH(3)]" />
+    <PhraseCalculatedInsert name="Arc Chord Bearing" text="[#ARC_CHORD_BEARING]" />
+    <PhraseCalculatedInsert name="Arc Chord Bearing Verbose" text="[#VERBOSE_ARC_CHORD_BEARING]" />
+    <PhraseCalculatedInsert name="Length" text="[#LENGTH(3)]" />
+    <PhraseCalculatedInsert name="Begin Coordinate Northing" text="[#BEGIN_COORDINATE_NORTHING(3)]"/>
+    <PhraseCalculatedInsert name="Begin Coordinate Easting" text="[#BEGIN_COORDINATE_EASTING(3)]" />
+    <PhraseCalculatedInsert name="End Coordinate Northing" text="[#END_COORDINATE_NORTHING(3)]" />
+    <PhraseCalculatedInsert name="End Coordinate Easting" text="[#END_COORDINATE_EASTING(3)]" />
+    <PhraseCalculatedInsert name="Arc Chord Length" text="[#ARC_CHORD_LENGTH(3)]" />
+    <PhraseCalculatedInsert name="Spiral Chord Bearing" text="[#SPIRAL_CHORD_BEARING]" />
+    <PhraseCalculatedInsert name="Spiral Chord Bearing Verbose" text="[#VERBOSE_SPIRAL_CHORD_BEARING]" />
+    <PhraseCalculatedInsert name="Spiral Chord Length" text="[#SPIRAL_CHORD_LENGTH(3)]" />
+    <PhraseCalculatedInsert name="Spiral Start Radius" text="[#SPIRAL_START_RADIUS(3)]" />
+    <PhraseCalculatedInsert name="Spiral End Radius" text="[#SPIRAL_END_RADIUS(3)]" />
+    <PhraseCalculatedInsert name="Acres" text="[#ACRES(3)]" />
+    <PhraseCalculatedInsert name="Hectares" text="[#HECTARES(3)]" />
+    <PhraseCalculatedInsert name="Square Feet" text="[#SQFEET(3)]" />
+    <PhraseCalculatedInsert name="Square Meters" text="[#SQMETERS(3)]" />
+  </PhraseCalculatedInserts>
+  <PhraseOptionInserts>
+    <PhraseOptionInsert name="Compass Direct">
+      <Options>
+        <Option text="North"/>
+        <Option text="East"/>
+        <Option text="South"/>
+        <Option text="West"/>
+      </Options>
+    </PhraseOptionInsert>
+    <PhraseOptionInsert name="Compass">
+      <Options>
+        <Option text="North"/>
+        <Option text="Northeast"/>
+        <Option text="East"/>
+        <Option text="Southeast"/>
+        <Option text="South"/>
+        <Option text="Southwest"/>
+        <Option text="West"/>
+        <Option text="NorthWest"/>
+      </Options>
+    </PhraseOptionInsert>
+    <PhraseOptionInsert name="Compass Quadrant">
+      <Options>
+        <Option text="Northeast"/>
+        <Option text="Southeast"/>
+        <Option text="Southwest"/>
+        <Option text="NorthWest"/>
+      </Options>
+    </PhraseOptionInsert>
+    <PhraseOptionInsert name="Lot or Section Reference">
+      <Options>
+        <Option text="Lot"/>
+        <Option text="Section"/>
+        <Option text="Quarter Section"/>
+        <Option text="Quarter Quarter Section"/>
+      </Options>
+    </PhraseOptionInsert>
+  </PhraseOptionInserts>
+  <PhraseCategories>
+    <PhraseCategory name="Opening">
+      <Phrases>
+        <Phrase name="Disclaimer" text="This data is not a certified survey and has not been reviewed by a local government agency for compliance with any applicable land development regulations.  The property described herein has been located for the [?State] Department of Transportation for highway design purposes. some errors may exist between this data and the actual ground location of property lines. This data is to be used as a general representation of the [?StateDOT]'s intent to acquire property for right of way purposes, and in no way represents an actual boundary survey of this property." />
+        <Phrase name="Location" text="A tract of land located in the [Compass Direct] half of the [Compass Quadrant] quarter of section [?Section], township [?Township] [Compass Direct], range [?Range] [Compass Direct], [?County] county, [?State], described as follows:" />
+      </Phrases>
+    </PhraseCategory>
+    <PhraseCategory name="Commencing">
+      <Phrases>
+        <Phrase name="Referring To" text="Referring to the [Compass Quadrant] corner of said [Lot or Section Reference]" />
+        <Phrase name="Referring To Sta/Off" text="Referring to alignment [Reference Alignment Name] at station [Begin Station] offset [Begin Offset]" />
+        <Phrase name="Beginning At" text="Beginning at the [Compass Quadrant] corner of said [Lot or Section Reference]" />
+        <Phrase name="To the POB" text=" to the point of beginning" />
+      </Phrases>
+    </PhraseCategory>
+    <PhraseCategory name="Thence" >
+      <Phrases>
+        <Phrase name="From the POB" text=" From the point of beginning" />
+	<Phrase name="Tangent by Deflection" text="; thence [Compass Direction]erly deflecting [Deflection Degrees] degrees [Deflection Minutes] minutes [Deflection Seconds] seconds [Left/Right], a distance of [Length] meters" />
+        <Phrase name="Tangent Bearing-Length wCoords Verbose" text="; thence with a beginning coordinate [Begin Coordinate Northing] Northing, [Begin Coordinate Easting] Easting, and an end coordinate [End Coordinate Northing] Northing, [End Coordinate Easting] Easting, on a bearing of [Line Bearing Verbose] for a distance of [Length] meters" />
+        <Phrase name="Tangent Bearing-Length" text="; thence on a bearing of [Line Bearing] for a distance of [Length] meters;" />
+        <Phrase name="Tangent With Stations" text="; thence on a bearing of [Line Bearing] for a distance of [Length] meters, a begin station of [Begin Station] and an end station of [End Station];" />
+        <Phrase name="Tangent Length-Bearing" text="; thence a distance of [Length] meters on a bearing of [Line Bearing]" />
+        <Phrase name="Arc by Radius" text="; thence [Compass Direction]erly on a [Radius] foot radius curve to the [Left/Right], having a length of [Length] meters;" />
+        <Phrase name="Arc by Radius All Calls" text="; thence [Compass Direction]erly on a [Radius] foot radius curve to the [Left/Right], having a length of [Length] meters, beginning bearing of [Arc Begin Bearing Verbose], ending bearing of [Arc End Bearing Verbose], delta angle of [Arc Delta Angle], chord bearing of [Arc Chord Bearing], and tangent length of [Arc Tangent Length];" />
+        <Phrase name="Arc by Radius Verbose" text="; thence [Compass Direction]erly on a [Radius] foot radius curve to the [Left/Right], having a length of [Length] meters, beginning bearing of [Arc Begin Bearing Verbose], ending bearing of [Arc End Bearing Verbose], chord bearing of [Arc Chord Bearing Verbose], and tangent length of [Arc Tangent Length];" />
+        <Phrase name="Arc by Radius Bearings" text="; thence [Compass Direction]erly on a [Radius] foot radius curve to the [Left/Right], having a length of [Length] meters, a begin bearing of [Arc Begin Bearing] and an end bearing of [Arc End Bearing];" />
+        <Phrase name="Arc by Radius Bearings Verbose" text="; thence [Compass Direction]erly on a [Radius] foot radius curve to the [Left/Right], having a length of [Length] meters, a begin bearing of [Arc Begin Bearing Verbose] and an end bearing of [Arc End Bearing Verbose];" />
+        <Phrase name="Arc by Radius Brief" text="; thence [Compass Direction]erly on a [Radius] foot radius curve to the [Left/Right], deflection to the initial tangent being [Deflection Degrees] degrees [Deflection Minutes] minutes [Deflection Seconds] seconds" />
+        <Phrase name="Arc by Chord" text="; thence [Compass Direction]erly on a [Radius] foot radius curve to the [Left/Right], said curve having a chord bearing of [Arc Chord Bearing] and chord length of [Arc Chord Length] meters" />
+        <Phrase name="Spiral by Radius" text="; thence [Compass Direction]erly on a [Length] foot spiral, said spiral having a beginning radius of [Spiral Start Radius] meters and ending radius of [Spiral End Radius] meters" />
+        <Phrase name="Spiral by Chord" text="; thence [Compass Direction]erly on a [Length] foot spiral, said spiral having a chord bearing of [Spiral Chord Bearing] and chord length of [Spiral Chord Length] meters" />
+      </Phrases>
+    </PhraseCategory>
+    <PhraseCategory name="Closing">
+      <Phrases>
+        <Phrase name="CloseToThePOB" text=" to the point of beginning, containing [Hectares] acres, [Square Meters] square meters, more or less." />
+      </Phrases>
+    </PhraseCategory>
+  </PhraseCategories>
+</RightOfWayDeedPhraseCatalog>

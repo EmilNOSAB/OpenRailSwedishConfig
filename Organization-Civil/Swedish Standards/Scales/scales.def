@@ -1,0 +1,91 @@
+#-------------------------------------------------------------------------------
+# This is a MicroStation V8 Scale Definition file.
+#
+# Lines that begin with # are for descriptive comments.
+#
+# $Copyright: (c) 2019 Bentley Systems, Incorporated. All rights reserved. $
+#-------------------------------------------------------------------------------
+# The active scales.def file is used to control the available list of scale factors
+# displayed in the user interface.
+#
+# The format of this file consists of one scale definition per line, where the
+# format of each line is:
+#
+# Name;     PreScale:PostScale;     UnitSystems
+#
+# Name:
+# Used for display of the scale factor in the user interface.  Use the special value "_[SYSTEM]_"
+# to indicate that the program should use the standard builtin name.
+#
+# PreScale, PostScale:
+# Defines the scale factor as the ratio of PreScale divided by PostScale.
+#
+# UnitSystems:
+# Used to filter the list of scales.  The user interface will typically use the active model's
+# master units to control the visible scales.  Only scales that specify a system that matches 
+# the system of the active model will be displayed.  Multiple systems can be specified.  If 
+# 1,2,3 is specified then the scale will not be filtered based on the system.
+# 
+#   Valid values for System are:
+#   1 English (based on International Foot)
+#   2 Metric
+#   3 English (based on US Survey Foot)
+#
+# For each line any content following '#' is ignored.
+#
+# To customize this data make a copy of this file, place it within your configuration, and
+# define the configuration variable MS_CUSTOMSCALEDEF with that location.
+#
+#-------------------------------------------------------------------------------
+#
+# MicroStation Standard Scale Examples
+#
+#   Name        Scale      System
+_[SYSTEM]_ ;     1:1;         1,2,3  # Full Size 1=1
+_[SYSTEM]_ ;     2:1;         1,3    # 6"=1'-0"
+_[SYSTEM]_ ;     4:1;         1,3    # 3"=1'-0"
+_[SYSTEM]_ ;     8:1;         1,3    # 1 1/2"=1'-0"
+_[SYSTEM]_ ;     12:1;        1,3    # 1"=1'-0"
+_[SYSTEM]_ ;     16:1;        1,3    # 3/4"=1'-0"
+_[SYSTEM]_ ;     24:1;        1,3    # 1/2"=1'-0"
+_[SYSTEM]_ ;     32:1;        1,3    # 3/8"=1'-0"
+_[SYSTEM]_ ;     48:1;        1,3    # 1/4"=1'-0"
+_[SYSTEM]_ ;     64:1;        1,3    # 3/16"=1'-0"
+_[SYSTEM]_ ;     96:1;        1,3    # 1/8"=1'-0"
+_[SYSTEM]_ ;     192:1;       1,3    # 1/16"=1'-0"
+_[SYSTEM]_ ;     384:1;       1,3    # 1/32"=1'-0"
+_[SYSTEM]_ ;     60:1;        1,3    # 1"=5'
+_[SYSTEM]_ ;     120:1;       1,3    # 1"=10'
+_[SYSTEM]_ ;     240:1;       1,3    # 1"=20'
+_[SYSTEM]_ ;     360:1;       1,3    # 1"=30'
+_[SYSTEM]_ ;     480:1;       1,3    # 1"=40'
+_[SYSTEM]_ ;     600:1;       1,3    # 1"=50'
+_[SYSTEM]_ ;     720:1;       1,3    # 1"=60'
+_[SYSTEM]_ ;     1200:1;      1,3    # 1"=100'
+_[SYSTEM]_ ;     2400:1;      1,3    # 1"=200'
+_[SYSTEM]_ ;     3600:1;      1,3    # 1"=300'
+_[SYSTEM]_ ;     4800:1;      1,3    # 1"=400'
+_[SYSTEM]_ ;     6000:1;      1,3    # 1"=500'
+_[SYSTEM]_ ;     7200:1;      1,3    # 1"=600'
+_[SYSTEM]_ ;     12000:1;     1,3    # 1"=1000'
+#Direct scale names
+_[SYSTEM]_ ;     2:1;         2      # 1:2
+_[SYSTEM]_ ;     2.5:1;       2      # 1:2.5
+_[SYSTEM]_ ;     5:1;         2      # 1:5
+_[SYSTEM]_ ;     10:1;        2      # 1:10
+_[SYSTEM]_ ;     20:1;        2      # 1:20
+_[SYSTEM]_ ;     25:1;        2      # 1:25
+_[SYSTEM]_ ;     50:1;        2      # 1:50
+_[SYSTEM]_ ;     100:1;       2      # 1:100
+_[SYSTEM]_ ;     200:1;       2      # 1:200
+_[SYSTEM]_ ;     250:1;       2      # 1:250
+_[SYSTEM]_ ;     400:1;       2      # 1:400
+_[SYSTEM]_ ;     500:1;       2      # 1:500
+_[SYSTEM]_ ;     1000:1;      2      # 1:1000
+_[SYSTEM]_ ;     5000:1;      2      # 1:5000
+_[SYSTEM]_ ;     10000:1;     2      # 1:10,000
+_[SYSTEM]_ ;     25000:1;     2      # 1:25,000
+_[SYSTEM]_ ;     50000:1;     2      # 1:50,000
+_[SYSTEM]_ ;     100000:1;    2      # 1:100,000
+_[SYSTEM]_ ;     250000:1;    2      # 1:250,000
+

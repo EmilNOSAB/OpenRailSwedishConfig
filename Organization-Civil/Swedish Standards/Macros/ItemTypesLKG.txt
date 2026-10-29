@@ -1,0 +1,11 @@
+#----------------------------------------------------------------------
+#
+#  Command file for batchprocess utility
+#
+#  This command file was originally copied from $(MS_DATA)cmdfiletemplate.txt.
+#  Command file information:
+#       - Lines that start with the '#' character are treated as comments and ignored.
+#
+#----------------------------------------------------------------------
+macro vba open d:\temp\ItemTypesLKG.mvba
+macro vba run StoreLastKnownGoodValues

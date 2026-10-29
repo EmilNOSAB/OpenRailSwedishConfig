@@ -1,10 +1,18 @@
-# Local-only output
+# Local backups and validation output must never be published.
 _backup/
 _validation/
 _installer-backups/
 *.bak
 *.bak-*
+
+# Generated distribution archives and personal OpenRail preferences.
 *.zip
 configuration.xml
 **/prefs/
 *.upf
+
+# Project output, retaining the starter directory structure.
+WorkSpaces/**/WorkSets/*/Dgn/*
+!WorkSpaces/**/WorkSets/*/Dgn/.gitkeep
+WorkSpaces/**/WorkSets/*/out/*
+!WorkSpaces/**/WorkSets/*/out/.gitkeep

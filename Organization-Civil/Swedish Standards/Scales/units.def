@@ -1,0 +1,137 @@
+#-------------------------------------------------------------------------------
+# This is a MicroStation V8 Unit Definition file.
+#
+# Lines that begin with # are for descriptive comments.
+#
+# $Copyright: (c) 2019 Bentley Systems, Incorporated. All rights reserved. $
+#-------------------------------------------------------------------------------
+#
+# The active units definition file is used in two instances:
+#
+#   1) Only the units defined in the units.def file are typically accessible in
+#      the user interface.  To include all the known units in the user interface,
+#      define the configuration variable MS_UNITS_SHOWALL.
+#
+#   2) The units.def file is consulted when converting data from file formats
+#      with incomplete unit information.  For example, V7 dgn files provide only
+#      a two character unit label.  This two character label is compared to the
+#      labels supplied in the units.def file to determine the correct mathematical
+#      definition.
+#
+# NOTE: In both of the above cases, when a unit from the unit definition file
+#       conflicts with one of the standard units, the unit from the definition
+#       file will be used.
+#
+# NOTE: Both standard and custom units are accessible via the "SET UNITS" keyin.
+#
+# The format of this file consists of one unit definition per line, where the
+# format of each line is:
+#
+# Label,Label,...,Label; Name(singular); Name(plural); Numerator; Denominator; Base; System
+#
+# Label:
+# Used to specify the default label for coordinate readout and dimensioning.  A list of
+# labels can be provided but only the first is used by V8.  The other labels are used
+# when loading a V7 format file, in which case the label for the V7 file's master unit
+# will be matched against all the labels that are provided.
+#
+# Name(singular) and Name(plural):
+# Used for display of the unit in the user interface.  Use the special value "_[SYSTEM]_"
+# to indicate that the program should use the standard builtin name.
+#
+# Numerator and Denominator:
+# Together these are used to define the size of the unit being described.  The ratio of
+# numerator divided by denominator represents the number X of the new unit that make
+# up a single Meter.  For example: 100.0 / 1.0 = 100.0 centimeters = 1 meter.  To ensure
+# the greatest possible accuracy, it is highly recommended that both numerator and
+# denominator be specified as whole integer values.
+#
+# Base:
+# Only units of the same base can be compared.  All linear distance units should use a
+# base of Meter.  For nonlinear units such as degrees latitude or longitude specify
+# base Unitless.
+#
+#   Valid values for Base are:
+#   0 Unitless
+#   1 Meter
+#
+# System:
+# Used to catagorize units for display in some dialogs.
+#
+#   Valid values for System are:
+#   0 Undefined
+#   1 English (based on International Foot)
+#   2 Metric
+#   3 English (based on US Survey Foot)
+#
+# For each line any content following '#' is ignored.
+#
+# To customize this data make a copy of this file, place it within your configuration, and
+# define the configuration variable MS_CUSTOMUNITDEF with that location.
+#
+#-------------------------------------------------------------------------------
+#
+# MicroStation Standard Unit Examples
+#
+#Label,Label,...; Name(singular); Name(plural);              Numerator;           Denominator; Base; System
+
+#  SI (metric) units
+#
+#fm;              _[SYSTEM]_;     _[SYSTEM]_;       1000000000000000.0;                   1.0;    1;      2    #Femtometers
+#pm;              _[SYSTEM]_;     _[SYSTEM]_;          1000000000000.0;                   1.0;    1;      2    #Picometers
+#nm;              _[SYSTEM]_;     _[SYSTEM]_;             1000000000.0;                   1.0;    1;      2    #Nanometers
+    um;           _[SYSTEM]_;     _[SYSTEM]_;                1000000.0;                   1.0;    1;      2    #Micrometers
+    mm;           _[SYSTEM]_;     _[SYSTEM]_;                   1000.0;                   1.0;    1;      2    #Millimeters
+    cm;           _[SYSTEM]_;     _[SYSTEM]_;                    100.0;                   1.0;    1;      2    #Centimeters
+#dm;              _[SYSTEM]_;     _[SYSTEM]_;                     10.0;                   1.0;    1;      2    #Decimeters
+    m;            _[SYSTEM]_;     _[SYSTEM]_;                      1.0;                   1.0;    1;      2    #Meters
+#dam;             _[SYSTEM]_;     _[SYSTEM]_;                      1.0;                  10.0;    1;      2    #Dekameters
+#hm;              _[SYSTEM]_;     _[SYSTEM]_;                      1.0;                 100.0;    1;      2    #Hectometers
+    km;           _[SYSTEM]_;     _[SYSTEM]_;                      1.0;                1000.0;    1;      2    #Kilometers 
+#Mm;              _[SYSTEM]_;     _[SYSTEM]_;                      1.0;             1000000.0;    1;      2    #Megameters
+#Gm;              _[SYSTEM]_;     _[SYSTEM]_;                      1.0;          1000000000.0;    1;      2    #Gigameters
+#Tm;              _[SYSTEM]_;     _[SYSTEM]_;                      1.0;       1000000000000.0;    1;      2    #Terameters
+#Pm;              _[SYSTEM]_;     _[SYSTEM]_;                      1.0;    1000000000000000.0;    1;      2    #Petameters
+    NM;           _[SYSTEM]_;     _[SYSTEM]_;                      1.0;                1852.0;    1;      2    #Nautical Miles
+#
+#  English units (based on International Foot)
+#
+    ui;           _[SYSTEM]_;     _[SYSTEM]_;            10000000000.0;                 254.0;    1;      1    #MicroInches
+    mil;          _[SYSTEM]_;     _[SYSTEM]_;               10000000.0;                 254.0;    1;      1    #Mils       
+#pt;              _[SYSTEM]_;     _[SYSTEM]_;                 720000.0;                 254.0;    1;      1    #Points     
+#pica;            _[SYSTEM]_;     _[SYSTEM]_;                  60000.0;                 254.0;    1;      1    #Picas      
+    in,";         _[SYSTEM]_;     _[SYSTEM]_;                  10000.0;                 254.0;    1;      1    #Inches     
+    ft,';         _[SYSTEM]_;     _[SYSTEM]_;                  10000.0;                3048.0;    1;      1    #Feet       
+    yd;           _[SYSTEM]_;     _[SYSTEM]_;                  10000.0;                9144.0;    1;      1    #Yards      
+    mi;           _[SYSTEM]_;     _[SYSTEM]_;                  10000.0;            16093440.0;    1;      1    #Miles      
+#
+#
+#  English units (based on U.S. Survey Foot)
+#
+    st,th,Th,TH;  US Survey Tenths; US Survey Tenths;          39370.0;                1200.0;    1;      3    #US Survey Tenths
+    si,in,";      _[SYSTEM]_;     _[SYSTEM]_;                  39370.0;                1000.0;    1;      3    #US Survey Inches
+    sf,ft,';      _[SYSTEM]_;     _[SYSTEM]_;                  39370.0;               12000.0;    1;      3    #US Survey Feet  
+#fat;             _[SYSTEM]_;     _[SYSTEM]_;                  39370.0;               72000.0;    1;      3    #Fathoms         
+#rd;              _[SYSTEM]_;     _[SYSTEM]_;                  39370.0;              198000.0;    1;      3    #Rods            
+#ch;              _[SYSTEM]_;     _[SYSTEM]_;                  39370.0;              792000.0;    1;      3    #Chains          
+#fur;             _[SYSTEM]_;     _[SYSTEM]_;                  39370.0;             7920000.0;    1;      3    #Furlongs        
+    sm,mi;        _[SYSTEM]_;     _[SYSTEM]_;                  39370.0;            63360000.0;    1;      3    #US Survey Miles 
+#
+#
+#  No System
+#
+#A;               _[SYSTEM]_;     _[SYSTEM]_;            10000000000.0;                   1.0;    1;      2    #Angstroms             
+#nm;              _[SYSTEM]_;     _[SYSTEM]_;                      1.0;                1852.0;    1;      0    #Nautical Miles        
+#au;              _[SYSTEM]_;     _[SYSTEM]_;                      1.0;        149597900000.0;    1;      0    #Astronomical Units
+#ly;              _[SYSTEM]_;     _[SYSTEM]_;                      1.0;    9460730000000000.0;    1;      0    #Light Years           
+#pc;              _[SYSTEM]_;     _[SYSTEM]_;                      1.0;   30856780000000000.0;    1;      0    #Parsecs               
+#
+#
+#  Angular measurements (used for Nonprojected Geographic Coordinate Systems)
+#
+   sec;           _[SYSTEM]_;     _[SYSTEM]_;                    3600.0;                   1.0;    2;      0    #Seconds 
+   min;           _[SYSTEM]_;     _[SYSTEM]_;                      60.0;                   1.0;    2;      0    #Minutes 
+   grad;          _[SYSTEM]_;     _[SYSTEM]_;                      10.0;                   9.0;    2;      0    #Grads 
+   deg;           _[SYSTEM]_;     _[SYSTEM]_;                       1.0;                   1.0;    2;      0    #Degrees
+   rad;           _[SYSTEM]_;     _[SYSTEM]_;    3.14159265358979323846;                 180.0;    2;      0    #Radians
+

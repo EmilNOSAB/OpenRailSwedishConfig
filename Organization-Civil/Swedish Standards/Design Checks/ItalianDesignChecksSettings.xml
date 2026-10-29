@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GeometryDesignChecksSettings xmlns="OpenRoads">
+  <GeneralVerticalChecksParameters  eyeHeight="1.1" targetHeight="0.1" headlightHeight="0.5" headlightAngle="1.0"/>
+  <NormalGeometryChecksTable>
+    <NormalGeometryChecksTableEntry speed="40" minTangentLength="30" minTrackDistance="180"/>
+    <NormalGeometryChecksTableEntry speed="50" minTangentLength="40" minTrackDistance="220"/>
+    <NormalGeometryChecksTableEntry speed="60" minTangentLength="50" minTrackDistance="280"/>
+    <NormalGeometryChecksTableEntry speed="70" minTangentLength="65" minTrackDistance="350"/>
+    <NormalGeometryChecksTableEntry speed="80" minTangentLength="90" minTrackDistance="420"/>
+    <NormalGeometryChecksTableEntry speed="90" minTangentLength="115" minTrackDistance="500"/>
+    <NormalGeometryChecksTableEntry speed="100" minTangentLength="150" minTrackDistance="560"/>
+    <NormalGeometryChecksTableEntry speed="110" minTangentLength="190" minTrackDistance="640"/>
+    <NormalGeometryChecksTableEntry speed="120" minTangentLength="250" minTrackDistance="720"/>
+    <NormalGeometryChecksTableEntry speed="130" minTangentLength="300" minTrackDistance="800"/>
+    <NormalGeometryChecksTableEntry speed="140" minTangentLength="360" minTrackDistance="860"/>
+  </NormalGeometryChecksTable>
+  <MountainGeometryChecksTable>
+    <MountainGeometryChecksTableEntry speed="30" maxSlope="0.12" minTangentLength="10" minHorizontalCurveRadius="20" minTransitionA="10" minVerticalCrestRadius="600" minVerticalSagRadius="400" minTrackDistance="160"/>
+    <MountainGeometryChecksTableEntry speed="40" maxSlope="0.12" minTangentLength="20" minHorizontalCurveRadius="45" minTransitionA="20" minVerticalCrestRadius="1000" minVerticalSagRadius="500" minTrackDistance="180"/>
+    <MountainGeometryChecksTableEntry speed="50" maxSlope="0.11" minTangentLength="35" minHorizontalCurveRadius="80" minTransitionA="30" minVerticalCrestRadius="1400" minVerticalSagRadius="600" minTrackDistance="220"/>
+    <MountainGeometryChecksTableEntry speed="60" maxSlope="0.10" minTangentLength="45" minHorizontalCurveRadius="125" minTransitionA="40" minVerticalCrestRadius="2400" minVerticalSagRadius="750" minTrackDistance="280"/>
+    <MountainGeometryChecksTableEntry speed="70" maxSlope="0.09" minTangentLength="60" minHorizontalCurveRadius="180" minTransitionA="60" minVerticalCrestRadius="3150" minVerticalSagRadius="1000" minTrackDistance="350"/>
+    <MountainGeometryChecksTableEntry speed="80" maxSlope="0.08" minTangentLength="85" minHorizontalCurveRadius="250" minTransitionA="80" minVerticalCrestRadius="4400" minVerticalSagRadius="1300" minTrackDistance="420"/>
+    <MountainGeometryChecksTableEntry speed="90" maxSlope="0.07" minTangentLength="115" minHorizontalCurveRadius="340" minTransitionA="110" minVerticalCrestRadius="5700" minVerticalSagRadius="2400" minTrackDistance="500"/>
+    <MountainGeometryChecksTableEntry speed="100" maxSlope="0.06" minTangentLength="150" minHorizontalCurveRadius="450" minTransitionA="150" minVerticalCrestRadius="8300" minVerticalSagRadius="3800" minTrackDistance="560"/>
+    <MountainGeometryChecksTableEntry speed="110" maxSlope="0.05" minTangentLength="190" minHorizontalCurveRadius="580" minTransitionA="190" minVerticalCrestRadius="12000" minVerticalSagRadius="6000" minTrackDistance="640"/>
+  </MountainGeometryChecksTable>
+  <RoadDefinitions>
+    <RoadDefinition name="Mountain Roads" isMountain="True" isExtraUrban="False"/>
+    <RoadDefinition name="A (Autostrada ambito Extraurbano);2+2 corsie;90-140" maxSlope="0.05" minHorizontalCurveRadius="339" isMountain="False" isExtraUrban="True"/>
+    <RoadDefinition name="A (Autostrade ambito Extraurbano); 3+3 corsie ; 90-140" maxSlope="0.05" minHorizontalCurveRadius="339" isMountain="False" isExtraUrban="True"/>
+    <RoadDefinition name="A (Autostrade ambito Urbano); 2+2 corsie; 80-140" maxSlope="0.06" minHorizontalCurveRadius="252" isMountain="False" isExtraUrban="False"/>
+    <RoadDefinition name="A (Autostrade ambito Urbano) ); 3+3 corsie ; 80-140" maxSlope="0.06" minHorizontalCurveRadius="252" isMountain="False" isExtraUrban="False"/>
+    <RoadDefinition name="B (Extraurbane Principali); 2+2 corsie ; 70-120" maxSlope="0.06" minHorizontalCurveRadius="178" isMountain="False" isExtraUrban="False"/>
+    <RoadDefinition name="B (Extraurbane Principali); 3+3 corsie ; 70-120" maxSlope="0.06" minHorizontalCurveRadius="178" isMountain="False" isExtraUrban="False"/>
+    <RoadDefinition name="C (Extraurbane Secondarie); C1; 60-100" maxSlope="0.07" minHorizontalCurveRadius="118" isMountain="False" isExtraUrban="False"/>
+    <RoadDefinition name="C (Extraurbane Secondarie); C2; 60-100" maxSlope="0.07" minHorizontalCurveRadius="118" isMountain="False" isExtraUrban="False"/>
+    <RoadDefinition name="D (Urbane di Scorrimento); 2+2 corsie ; 50-80" maxSlope="0.06" minHorizontalCurveRadius="77" isMountain="False" isExtraUrban="False"/>
+    <RoadDefinition name="D (Urbane di Scorrimento); 3+3 corsie ; 50-80" maxSlope="0.06" minHorizontalCurveRadius="77" isMountain="False" isExtraUrban="False"/>
+    <RoadDefinition name="E (Urbane di Quartiere); 1+1 corsie; 40-60" maxSlope="0.08" minHorizontalCurveRadius="51" isMountain="False" isExtraUrban="False"/>
+    <RoadDefinition name="F (Locali ambito Extraurbano); F1; 40-100" maxSlope="0.10" minHorizontalCurveRadius="45" isMountain="False" isExtraUrban="True"/>
+    <RoadDefinition name="F (Locali ambito Extraurbano); F2; 40-100" maxSlope="0.10" minHorizontalCurveRadius="45" isMountain="False" isExtraUrban="True"/>
+    <RoadDefinition name="F (Locali ambito Urbano); 2 corsie; 25-60" maxSlope="0.10" minHorizontalCurveRadius="19" isMountain="False" isExtraUrban="False"/>
+    <RoadDefinition name="F (Locali ambito Urbano); 2 corsie + 2 stalli; 25-60" maxSlope="0.10" minHorizontalCurveRadius="19" isMountain="False" isExtraUrban="False"/>
+    <RoadDefinition name="A (Autostrada) Singola Carregiata" maxSlope="0.05" minHorizontalCurveRadius="339" isMountain="False" isExtraUrban="False"/>
+    <RoadDefinition name="Rampa" maxSlope="0.16" minHorizontalCurveRadius="45" isMountain="False" isExtraUrban="False"/>
+  </RoadDefinitions>
+</GeometryDesignChecksSettings>

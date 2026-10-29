@@ -1,0 +1,91 @@
+#     färgplot.tbl
+
+BEGIN_GLOBAL
+    VERSION       = 850
+    PLOTTING
+    VIEWS         = 1-8
+    SYMBOLOGY     = AsDisplayed
+END_GLOBAL
+
+BEGIN Construction
+    IN_DISABLESECTION = 0
+    IN_USESECTIONNAME = 0
+    CLASS         = 2
+    MODELFORMAT   = 0
+    RETURN        = 1
+END
+
+BEGIN Raster
+    IN_DISABLESECTION = 0
+    IN_USESECTIONNAME = 0
+    TYPE          = 87
+    MODELFORMAT   = 0
+    PRIORITY      = 100
+END
+
+BEGIN Ytor
+    IN_DISABLESECTION = 0
+    IN_USESECTIONNAME = 0
+    TYPE          = 6,14,15,18,24
+    MODELFORMAT   = 0
+    PRIORITY      = 300
+END
+
+BEGIN Normal
+    IN_DISABLESECTION = 0
+    IN_USESECTIONNAME = 0
+    TYPE          = 2-4,11,12,16,19,23,27,33,35,36
+    MODELFORMAT   = 0
+    PRIORITY      = 500
+END
+
+BEGIN Text
+    IN_DISABLESECTION = 0
+    IN_USESECTIONNAME = 0
+    TYPE          = 17
+    MODELFORMAT   = 0
+    PRIORITY      = 700
+END
+
+BEGIN Text_node
+    IN_DISABLESECTION = 0
+    IN_USESECTIONNAME = 0
+    TYPE          = 7
+    MODELFORMAT   = 0
+    OUT_COLOR     = 0xffffff
+END
+
+BEGIN_WEIGHTMAP
+      0 = 4 0.18
+      1 = 4 0.25
+      2 = 4 0.35
+      3 = 4 0.5
+      4 = 4 0.7
+      5 = 4 1
+      6 = 4 2
+      7 = 4 0.2
+      8 = 4 0.2
+      9 = 4 0.2
+     10 = 4 0.2
+     11 = 4 0.2
+     12 = 4 0.2
+     13 = 4 0.2
+     14 = 4 0.2
+     15 = 4 0.2
+     16 = 4 0.2
+     17 = 4 0.2
+     18 = 4 0.2
+     19 = 4 0.2
+     20 = 4 0.2
+     21 = 4 0.2
+     22 = 4 0.2
+     23 = 4 0.2
+     24 = 4 0.2
+     25 = 4 0.2
+     26 = 4 0.2
+     27 = 4 0.2
+     28 = 4 0.2
+     29 = 4 0.2
+     30 = 4 0.2
+     31 = 4 0.2
+END_WEIGHTMAP
