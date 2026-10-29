@@ -1,0 +1,10 @@
+# Local-only output
+_backup/
+_validation/
+_installer-backups/
+*.bak
+*.bak-*
+*.zip
+configuration.xml
+**/prefs/
+*.upf
