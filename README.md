@@ -12,11 +12,16 @@ Otherwise it downloads this repository's `main` archive using the `URL` setting
 near the top of the BAT. That URL requires the configuration pull request to have
 been merged. For a fixed release archive, you can also set its `SHA256` there.
 Flat ZIPs and GitHub ZIPs containing a wrapping folder are supported.
+Downloads show a progress bar with the downloaded size and, when the server
+provides a total size, the percentage complete.
 
 Files are installed in `C:\Swedish Standards Rail`. Existing extra files and
 WorkSets are retained. Changed files are backed up under `_installer-backups`,
 and a copy failure rolls back files changed by that run. If needed, Windows asks
 for administrator access only for copying configuration files into `C:\`.
+When all 18 replacement NCAD libraries are present in the package, updates also
+back up and retire the seven supplied stock LVA resources. Incomplete packages
+leave those resources in place. Unrelated additional files remain untouched.
 
 The installer then opens the current user's existing
 `%LOCALAPPDATA%\Bentley\OpenRailDesigner\26.0.0\prefs\configuration.xml`
@@ -25,21 +30,23 @@ folder, such as `25.0.0` for 2025. This XML step runs as the original user even 
 file installation needed administrator access.
 
 Existing configurations, their settings, and the current selection are preserved.
-If the same folder is already registered, no duplicate is added and the XML is
-left unchanged. Otherwise the original XML is backed up beside it before an
-atomic replacement. Invalid or unsupported XML is rejected without overwriting it.
+If the same folder is already registered, no duplicate is added. The previous
+default name **Swedish Standards Rail** is renamed to **BJP26**, preserving its
+other settings; other existing names are kept. Changed XML is backed up beside
+the original before an atomic replacement. Invalid or unsupported XML is
+rejected without overwriting it.
 If no XML exists, the installer creates one and keeps Bentley examples available
 when their installed folder exists. Close OpenRail before running the installer.
 
 The ZIP does not need a preferences XML: any bundled `configuration.xml`, `prefs`
 folder, or `ConfigurationSetup.cfg` is skipped. After installation, select
-**Swedish Standards Rail** in OpenRail's configuration list. An existing entry for
-the same path keeps its current name.
+**BJP26** in OpenRail's configuration list. An existing entry with a custom name
+for the same path keeps that name.
 
 ## Load in OpenRail
 
 1. Open **Manage Configuration** on OpenRail's start screen.
-2. Add a configuration named **Swedish Standards Rail** with the folder path
+2. Add a configuration named **BJP26** with the folder path
    `C:\Swedish Standards Rail\` (select this root, not WorkSpaces or Organization-Civil).
 3. Select that configuration, then WorkSpace **Swedish Standards** and WorkSet
    **Swedish Rail**, or create a new WorkSet for your project.
@@ -63,6 +70,11 @@ Bentley's installed ConfigurationSetup.cfg does not need to be edited for this m
   superelevation condition corrected. New WorkSets can override the template library
   and design seed using the variables documented in their CFG files.
 - `Organization/standards.cfg` is available for future company-wide additions.
+- `Organization-Civil/LVA.cfg` loads the local NCAD LVA libraries in the original
+  **Swedish Standards** WorkSpace and **Swedish Rail** WorkSet. Six disciplines
+  supply 18 active libraries; experimental Signal libraries are included but
+  disabled by default. The stock LVA resources are removed from the package.
+  See `Organization-Civil/LVA/README.md`.
 
 The existing `OpenRail Templates Metric.itl` default is preserved. The supplied
 TRV template libraries remain available to choose in OpenRail. Rail dimensions,
@@ -89,8 +101,10 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tests\Installer.Tests.
 ```
 
 These checks use isolated temporary folders. They cover existing XML entry and
-selection preservation, repeated installs, name collisions, new profiles, malformed
-XML, ZIP layouts and exclusions, traversal rejection, file backups, and rollback.
+selection preservation, BJP26 naming and migration, repeated installs, name
+collisions, new profiles, malformed XML, ZIP layouts and exclusions, traversal
+rejection, the BAT and administrator entry points, LVA migration, backups and
+rollback, including a locked stock library during migration.
 Local `_backup`, `_validation`, `_installer-backups`, preferences, and generated
 ZIPs are excluded from Git.
 
