@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FavoriteSymbols Version="1.0">
+    <FavoriteSymbol FontType="2" FontFace="Engineering Vert" CodePoint="0x00B2" Description="Squared" />
+    <FavoriteSymbol FontType="2" FontFace="Engineering Vert" CodePoint="0x00B3" Description="Cubed" />
+    <FavoriteSymbol FontType="2" FontFace="Engineering Vert" CodePoint="0x0394" Description="Delta" />
+    <FavoriteSymbol FontType="2" FontFace="Engineering Vert" CodePoint="0xE100" Description="Baseline" />
+    <FavoriteSymbol FontType="2" FontFace="Engineering Vert" CodePoint="0xE101" Description="Flowline" />
+    <FavoriteSymbol FontType="2" FontFace="Engineering Vert" CodePoint="0xE102" Description="Matchline" />
+    <FavoriteSymbol FontType="2" FontFace="Engineering Vert" CodePoint="0xE103" Description="Property Line" />
+    <FavoriteSymbol FontType="2" FontFace="Engineering Vert" CodePoint="0xE104" Description="Centerline" />
+    <FavoriteSymbol FontType="2" FontFace="Engineering Vert" CodePoint="0x2081" Description="Subscript 1" />
+    <FavoriteSymbol FontType="2" FontFace="Engineering Vert" CodePoint="0x2082" Description="Subscript 2" />
+    <FavoriteSymbol FontType="2" FontFace="Engineering Vert" CodePoint="0x2083" Description="Subscript 3" />
+</FavoriteSymbols>

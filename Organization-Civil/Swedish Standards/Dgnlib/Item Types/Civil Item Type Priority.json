@@ -1,0 +1,38 @@
+{
+  "commandOverride": {
+    "commandName": "Append Element",
+    "priorityOverride": "none"
+  },
+  "commandOverride": {
+    "commandName": "Create Complex Element",
+    "priorityOverride": "last"
+  },
+  "commandOverride": {
+    "commandName": "Redefine Complex Element",
+    "priorityOverride": "none"
+  },
+  "commandOverride": {
+    "commandName": "Ratio Offset Taper",
+    "priorityOverride": "none"
+  },
+  "commandOverride": {
+    "commandName": "Remove Intervals",
+    "priorityOverride": "first"
+  },
+  "commandOverride": {
+    "commandName": "Single Offset Entire Element",
+    "priorityOverride": "none"
+  },
+  "commandOverride": {
+    "commandName": "Single Offset Partial",
+    "priorityOverride": "none"
+  },
+  "commandOverride": {
+    "commandName": "Transform Elements",
+    "priorityOverride": "none"
+  },
+  "commandOverride": {
+    "commandName": "Variable Offset Taper",
+    "priorityOverride": "none"
+  }
+}

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenRoadsSightVisibility xmlns="OpenRoads">
+    <Methods>
+        <!--                                                                                         -->
+        <!-- Valid methodTypes: Table, Italian_SSD, AASHTO_2011_SSD, Australian_SSD, French_ARP_SSD  -->
+        <!--                                                                                         -->
+		
+        <!--                                Italian Standard Variables and Constant (Method = Italian_SSD)                               -->
+        <!-- Calculations based on Norme Funzionali e geometriche per la costruzione delle strade – Decreto Ministeriale 5 Novembre 2001 -->
+        <!-- Valid Italian roadCategory: ExtraUrban, Urban                                                                               -->
+        <!-- double ro = 1.15; // air mass (default value = 1.15)                                                                        -->
+        <!-- double cx = 0.35; // aerodynamic coefficient (default value = 0.35)                                                         -->
+        <!-- double S = 2.1;   // surface resistance (default value = 2.1)                                                               -->
+        <!-- double m = 1250;  // vehicle mass (default value = 1250)                                                                    -->
+        <!-- double Res = 0.0; // Rolling resistance                                                                                     -->
+        <!-- double t = 0.0;                                                                                                             -->
+        <!-- double V_interval = 0.1;                                                                                                    -->
+        <!-- double gravityConst = 9.81;                                                                                                 -->
+        <!-- int roundingMultiple // Computed Required Sight distances will be rounded to this multiple.  0 indicates no rounding.-->
+        <SightDistanceMethod name ="Italian SSD Extra Urban Via Features" methodType ="Italian_SSD">
+            <EyePosition interval="15.0" offset="0.0" height="1.08"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="5.0" offset="0.0" height="0.60"/>
+            <StandardVariables  roadCategory ="ExtraUrban" ro ="1.15" cx="0.35" S="2.1" m="1250" Res="0.0" t="0.0" V_interval="0.1" gravityConstant="9.81" roundingMultiple="0"/>
+        </SightDistanceMethod>
+        <SightDistanceMethod name ="Italian SSD Extra Urban Via CL Offsets" methodType ="Italian_SSD">
+            <EyePosition interval="15.0" offset="0.65" height="1.08"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="5.0" offset="3.0" height="0.60"/>
+            <StandardVariables roadCategory ="ExtraUrban" ro ="1.15" cx="0.35" S="2.1" m="1250" Res="0.0" t="0.0" V_interval="0.1" gravityConstant="9.81" roundingMultiple="0"/>
+        </SightDistanceMethod>
+        <SightDistanceMethod name ="Italian SSD Urban Via Features" methodType ="Italian_SSD">
+            <EyePosition interval="15.0" offset="0.0" height="1.08"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="5.0" offset="0.0" height="0.60"/>
+            <StandardVariables roadCategory ="Urban" ro ="1.15" cx="0.35" S="2.1" m="1250" Res="0.0" t="0.0" V_interval="0.1" gravityConstant="9.81" roundingMultiple="0"/>
+        </SightDistanceMethod>
+        <SightDistanceMethod name ="Italian SSD Urban Via CL Offsets" methodType ="Italian_SSD">
+            <EyePosition interval="15.0" offset="0.65" height="1.08"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="5.0" offset="3.0" height="0.60"/>
+            <StandardVariables roadCategory ="Urban" ro ="1.15" cx="0.35" S="2.1" m="1250" Res="0.0" t="0.0" V_interval="0.1" gravityConstant="9.81" roundingMultiple="0"/>
+        </SightDistanceMethod>
+        <!--                   2011 adn 2018 AASHTO Standard Variables and Constants (Method = AASHTO_2011_SSD)                   -->
+		<!-- Calculations based on 2011 AASHTO A Policy on Geometric Design of Highways and Streets, Chapter 3                    -->
+        <!-- double reactionTime  //Brake reaction time. Defaults to 2.5 seconds if not defined in this settings file             -->
+        <!-- double gradeThreshold // Grades(m/m) less than gradeThreshold will use SSD equation 3-2                              -->
+        <!--                       // Grades(m/m) greater than or equal to the gradeThreshold will use SSD equation 3-3           -->
+        <!-- double gravityConst = 9.81; // meters/sec^2                                                                          -->
+        <!-- int roundingMultiple // Computed Required Sight distances will be rounded to this multiple.  0 indicates no rounding.-->
+        <SightDistanceMethod name ="2011 AASHTO Stopping Site Distance - Zero Offset" methodType ="AASHTO_2011_SSD" >
+            <EyePosition interval="15.0" offset="0.0" height="1.08"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="5.0" offset="0.0" height="0.60"/>
+            <StandardVariables reactionTime="2.5" gravityConstant="9.81" gradeThreshold ="0.03" roundingMultiple="1"/>
+        </SightDistanceMethod>
+        <SightDistanceMethod name ="2011 AASHTO Stopping Site Distance - Eye 3 meter Offset" methodType ="AASHTO_2011_SSD" >
+            <EyePosition interval="15.0" offset="3" height="1.08"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="5.0" offset="0.0" height="0.60"/>
+            <StandardVariables reactionTime="2.5" gravityConstant="9.81" gradeThreshold ="0.03" roundingMultiple="1"/>
+        </SightDistanceMethod>
+        <SightDistanceMethod name ="2018 AASHTO Stopping Site Distance - Zero Offset" methodType ="AASHTO_2011_SSD" >
+            <EyePosition interval="15.0" offset="0.0" height="1.08"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="5.0" offset="0.0" height="0.60"/>
+            <StandardVariables reactionTime="2.5" gravityConstant="9.81" gradeThreshold ="0.03" roundingMultiple="1"/>
+        </SightDistanceMethod>
+        <SightDistanceMethod name ="2018 AASHTO Stopping Site Distance - Eye 3 meter Offset" methodType ="AASHTO_2011_SSD" >
+            <EyePosition interval="15.0" offset="3" height="1.08"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="5.0" offset="0.0" height="0.60"/>
+            <StandardVariables reactionTime="2.5" gravityConstant="9.81" gradeThreshold ="0.03" roundingMultiple="1"/>
+        </SightDistanceMethod>
+        
+        <!--                         2016 Australian Standard Variables and Constants (Method = Australian_SSD)                        -->
+        <!-- Calculations based on 2016 Austroads: Guide to Road Design Part 3: Geometric Design, Section 5.3: Stopping Sight Distance -->
+        <!-- double reactionTime  //Brake reaction time. Defaults to 2.5 seconds if not defined in this settings file                  -->
+        <!-- double coefficientOfDeceleration // Defaults to 0.36 if not defined in this settings file                                 -->
+        <!-- double maxCoefficientOfDeceleration // Defaults to 0.46 if not defined. Used to compute Relaxed SSD                       -->
+        <!-- int roundingMultiple // Computed Required Sight distances will be rounded to this multiple.  0 indicates no rounding.     -->
+        <SightDistanceMethod name ="2016 Australian SSD Via Features" methodType ="Australian_SSD" >
+            <EyePosition interval="15.0" offset="0.0" height="1.10"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="5.0" offset="0.0" height="0.20"/>
+            <StandardVariables coefficientOfDeceleration ="0.36" maxCoefficientOfDeceleration ="0.46" reactionTime="2.0" roundingMultiple="0"/>
+        </SightDistanceMethod>
+        <SightDistanceMethod name ="2016 Australian SSD Via CL Offsets" methodType ="Australian_SSD" >
+            <EyePosition interval="15.0" offset="0.65" height="1.10"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="5.0" offset="3.0" height="0.20"/>
+            <StandardVariables coefficientOfDeceleration ="0.36" maxCoefficientOfDeceleration ="0.46" reactionTime="2.0" roundingMultiple="0"/>
+        </SightDistanceMethod>
+        
+        <!--                         French ARP Standard Variables and Constants (Method = French_ARP_SSD)                         -->
+		<!-- Calculations based on Aménagement des Routes Principales (ARP) - Guide technique, Chapitre 4 : Visibilité             -->
+        <!-- Valid French roadCategory: 2lanes, 3lanes2lanes, 2x2                                                                  -->
+        <!-- double reactionTime  //Brake reaction time. Defaults to 2.5 seconds if not defined in settings file                   -->
+        <!-- int roundingMultiple // Computed Required Sight distances will be rounded to this multiple.  0 indicates no rounding. -->
+        <SightDistanceMethod name ="French ARP SSD 2x2 Via Features" methodType ="French_ARP_SSD" >
+            <EyePosition interval="15.0" offset="0.0" height="1.10"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="5.0" offset="0.0" height="0.20"/>
+            <StandardVariables roadCategory ="2x2" gravityConstant="9.80665" reactionTime="2.0" roundingMultiple="0"/>
+        </SightDistanceMethod>
+        <SightDistanceMethod name ="French ARP SSD 2x2 Via CL Offsets" methodType ="French_ARP_SSD" >
+            <EyePosition interval="15.0" offset="0.65" height="1.10"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="5.0" offset="3.0" height="0.20"/>
+            <StandardVariables roadCategory ="2x2" gravityConstant="9.80665" reactionTime="2.0" roundingMultiple="0"/>
+        </SightDistanceMethod>
+        <SightDistanceMethod name ="French ARP SSD 2lanes Via Features" methodType ="French_ARP_SSD" >
+            <EyePosition interval="15.0" offset="0.0" height="1.10"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="5.0" offset="0.0" height="0.20"/>
+            <StandardVariables roadCategory ="2lanes" gravityConstant="9.80665" reactionTime="2.0" roundingMultiple="0"/>
+        </SightDistanceMethod>
+        <SightDistanceMethod name ="French ARP SSD 2lanes Via CL Offsets" methodType ="French_ARP_SSD" >
+            <EyePosition interval="15.0" offset="0.65" height="1.10"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="5.0" offset="3.0" height="0.20"/>
+            <StandardVariables roadCategory ="2lanes" gravityConstant="9.80665" reactionTime="2.0" roundingMultiple="0"/>
+        </SightDistanceMethod>
+        <SightDistanceMethod name ="French ARP SSD 3lanes2lanes Via Features" methodType ="French_ARP_SSD" >
+            <EyePosition interval="15.0" offset="0.0" height="1.10"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="5.0" offset="0.0" height="0.20"/>
+            <StandardVariables roadCategory ="3lanes2lanes" gravityConstant="9.80665" reactionTime="2.0" roundingMultiple="0"/>
+        </SightDistanceMethod>
+        <SightDistanceMethod name ="French ARP SSD 3lanes2lanes Via CL Offsets" methodType ="French_ARP_SSD" >
+            <EyePosition interval="15.0" offset="0.65" height="1.10"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="5.0" offset="3.0" height="0.20"/>
+            <StandardVariables roadCategory ="3lanes2lanes" gravityConstant="9.80665" reactionTime="2.0" roundingMultiple="0"/>
+        </SightDistanceMethod>
+        
+        <!--                                         AASHTO Tables                                 -->
+        <SightDistanceMethod name ="AASHTO 2011 Stopping on Level Roadways" methodType="Table" >
+            <EyePosition interval="15.0" offset="0.0" height="1.08"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="3.0" offset="0.0" height="0.60"/>
+            <SpeedTableEntry speed ="20" sightDistance="20" relaxedDistance="20"/>
+            <SpeedTableEntry speed ="30" sightDistance="35" relaxedDistance="35"/>
+            <SpeedTableEntry speed ="40" sightDistance="50" relaxedDistance="50"/>
+            <SpeedTableEntry speed ="50" sightDistance="65" relaxedDistance="65"/>
+            <SpeedTableEntry speed ="60" sightDistance="85" relaxedDistance="85"/>
+            <SpeedTableEntry speed ="70" sightDistance="105" relaxedDistance="105"/>
+            <SpeedTableEntry speed ="80" sightDistance="130" relaxedDistance="130"/>
+            <SpeedTableEntry speed ="90" sightDistance="160" relaxedDistance="160"/>
+            <SpeedTableEntry speed ="100" sightDistance="185" relaxedDistance="185"/>
+            <SpeedTableEntry speed ="110" sightDistance="220" relaxedDistance="220"/>
+            <SpeedTableEntry speed ="120" sightDistance="250" relaxedDistance="250"/>
+            <SpeedTableEntry speed ="130" sightDistance="285" relaxedDistance="285"/>
+        </SightDistanceMethod>
+        <SightDistanceMethod name ="AASHTO 2011 Passing" methodType="Table" >
+            <EyePosition interval="15.0" offset="0.0" height="1.08"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="3.0" offset="0.0" height="1.08"/>
+            <SpeedTableEntry speed ="30" sightDistance="120" relaxedDistance="120"/>
+            <SpeedTableEntry speed ="40" sightDistance="140" relaxedDistance="140"/>
+            <SpeedTableEntry speed ="50" sightDistance="160" relaxedDistance="160"/>
+            <SpeedTableEntry speed ="60" sightDistance="180" relaxedDistance="180"/>
+            <SpeedTableEntry speed ="70" sightDistance="210" relaxedDistance="210"/>
+            <SpeedTableEntry speed ="80" sightDistance="245" relaxedDistance="245"/>
+            <SpeedTableEntry speed ="90" sightDistance="280" relaxedDistance="280"/>
+            <SpeedTableEntry speed ="100" sightDistance="320" relaxedDistance="320"/>
+            <SpeedTableEntry speed ="110" sightDistance="355" relaxedDistance="355"/>
+            <SpeedTableEntry speed ="120" sightDistance="395" relaxedDistance="395"/>
+            <SpeedTableEntry speed ="130" sightDistance="440" relaxedDistance="440"/>
+        </SightDistanceMethod>
+        <SightDistanceMethod name ="AASHTO 2018 Stopping on Level Roadways" methodType="Table" >
+            <EyePosition interval="15.0" offset="0.0" height="1.08"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="3.0" offset="0.0" height="0.60"/>
+            <SpeedTableEntry speed ="20" sightDistance="20" relaxedDistance="20"/>
+            <SpeedTableEntry speed ="30" sightDistance="35" relaxedDistance="35"/>
+            <SpeedTableEntry speed ="40" sightDistance="50" relaxedDistance="50"/>
+            <SpeedTableEntry speed ="50" sightDistance="65" relaxedDistance="65"/>
+            <SpeedTableEntry speed ="60" sightDistance="85" relaxedDistance="85"/>
+            <SpeedTableEntry speed ="70" sightDistance="105" relaxedDistance="105"/>
+            <SpeedTableEntry speed ="80" sightDistance="130" relaxedDistance="130"/>
+            <SpeedTableEntry speed ="90" sightDistance="160" relaxedDistance="160"/>
+            <SpeedTableEntry speed ="100" sightDistance="185" relaxedDistance="185"/>
+            <SpeedTableEntry speed ="110" sightDistance="220" relaxedDistance="220"/>
+            <SpeedTableEntry speed ="120" sightDistance="250" relaxedDistance="250"/>
+            <SpeedTableEntry speed ="130" sightDistance="285" relaxedDistance="285"/>
+			<SpeedTableEntry speed ="140" sightDistance="325" relaxedDistance="325"/>
+        </SightDistanceMethod>
+        <SightDistanceMethod name ="AASHTO 2018 Passing" methodType="Table" >
+            <EyePosition interval="15.0" offset="0.0" height="1.08"/>
+            <ObjectPosition moveTargetToAchieveVisibility="false" interval="3.0" offset="0.0" height="1.08"/>
+            <SpeedTableEntry speed ="30" sightDistance="120" relaxedDistance="120"/>
+            <SpeedTableEntry speed ="40" sightDistance="140" relaxedDistance="140"/>
+            <SpeedTableEntry speed ="50" sightDistance="160" relaxedDistance="160"/>
+            <SpeedTableEntry speed ="60" sightDistance="180" relaxedDistance="180"/>
+            <SpeedTableEntry speed ="70" sightDistance="210" relaxedDistance="210"/>
+            <SpeedTableEntry speed ="80" sightDistance="245" relaxedDistance="245"/>
+            <SpeedTableEntry speed ="90" sightDistance="280" relaxedDistance="280"/>
+            <SpeedTableEntry speed ="100" sightDistance="320" relaxedDistance="320"/>
+            <SpeedTableEntry speed ="110" sightDistance="355" relaxedDistance="355"/>
+            <SpeedTableEntry speed ="120" sightDistance="395" relaxedDistance="395"/>
+            <SpeedTableEntry speed ="130" sightDistance="440" relaxedDistance="440"/>
+        </SightDistanceMethod>
+	</Methods>
+</OpenRoadsSightVisibility>

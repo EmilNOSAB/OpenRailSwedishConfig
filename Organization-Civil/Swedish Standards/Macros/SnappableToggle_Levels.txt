@@ -1,0 +1,6 @@
+# Level Names to be searched
+Draft_XS_Sheet_Minor_Grid
+Draft_XS_Sheet_Major_Grid
+Draft_XS_Grid
+Draft_Profile_Sheet_Major_Grid
+Draft_Profile_Sheet_Minor_Grid

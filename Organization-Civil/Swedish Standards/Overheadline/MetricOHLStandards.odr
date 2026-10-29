@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DesignRuleDoc>
+    <DesignRuleSet Name="MetricStandards" Version="1.4">
+        <CatenarySystems>
+            <CatenarySystem Name="Standard1" Voltage="1500" Current="4500" MaximumSpanLength="60" MaximumNumberOfSpans="32" MaximumWireRunLength="1300" MaximumSpanDifference="9" NominalEncumbrance="1.4" MinimumMidSpanEncumbrance="0.5" MinimumWireHeight="5.0" MaximumSpeed="160" NominalWireHeight="5.75" MaximumWireHeight="6.2" MinimumSpanLength="1" MidSpanContactWireSag="0" MaximumDropperSpacing="10" DistanceToFirstDropper="2.25" NumberOfDroppers="Odd/Even" CatenaryWireSagStartPosition="At Cantilever" MaximumGradient="3" MaximumGradientChange="0.75" ReducedEncumbrance="0.5" MaximumEncumbranceChange="0.5" OutOfService1WireHeightAboveNominal="0.150" OutOfService2WireHeightAboveNominal="0.500" EndOfWireHeightAboveNominal="0.9">
+                <CustomProperties>
+                    <Property Name="Voltage" Value="1500"/>
+                    <Property Name="Current" Value="4500"/>
+                    <Property Name="MaximumDropperSpacing" Value="10"/>
+                    <Property Name="DistanceToFirstDropper" Value="5"/>
+                    <Property Name="ReducedEncumbrance" Value="0.5"/>
+                    <Property Name="OutOfService1WireHeightAboveNominal" Value="0.15"/>
+                    <Property Name="OutOfService2WireHeightAboveNominal" Value="0.35"/>
+                    <Property Name="EndOfWireHeightAboveNominal" Value="0.5"/>
+                </CustomProperties>
+                <Wires>
+                    <CatenaryWire Area="150" Diameter="10.9" Gauge="10.5" Tension="12000" Weight="5.66" Material="Cu" Class="B"/>
+                    <ContactWire Area="200" Diameter="12.24" Gauge="107" Tension="12000" Weight="9.31" Material="Cu" Class="B"/>
+                    <DropperWire Area="120" Diameter="8.56" Gauge="10.5" Tension="3000" Weight="2.32" Material="CuAg" Class="4"/>
+                </Wires>
+                <LookupTableReference>
+                    <Standard TableName="StaggerTable1"/>
+                    <Overlap TableName="OverlapTypeSelectionTable"/>
+                </LookupTableReference>
+            </CatenarySystem>
+            <CatenarySystem Name="Standard2" Voltage="1500" Current="2000" MaximumSpanLength="60" MaximumNumberOfSpans="30" MaximumWireRunLength="1200" MaximumSpanDifference="3" NominalEncumbrance="1.4" MinimumMidSpanEncumbrance="0.6" MinimumWireHeight="5.2" MaximumSpeed="120" NominalWireHeight="5.75" MaximumWireHeight="5.65" MinimumSpanLength="1" MidSpanContactWireSag="0" MaximumDropperSpacing="8" DistanceToFirstDropper="5" NumberOfDroppers="Odd/Even" CatenaryWireSagStartPosition="At Cantilever" MaximumGradient="1.5" MaximumGradientChange="0.75" ReducedEncumbrance="0.5" MaximumEncumbranceChange="0.5" OutOfService1WireHeightAboveNominal="0.150" OutOfService2WireHeightAboveNominal="0.500" EndOfWireHeightAboveNominal="0.900">
+                <CustomProperties>
+                    <Property Name="Voltage" Value="1500"/>
+                    <Property Name="Current" Value="2000"/>
+                    <Property Name="MaximumDropperSpacing" Value="10"/>
+                    <Property Name="DistanceToFirstDropper" Value="5"/>
+                    <Property Name="ReducedEncumbrance" Value="0.5"/>
+                    <Property Name="OutOfService1WireHeightAboveNominal" Value="0.15"/>
+                    <Property Name="OutOfService2WireHeightAboveNominal" Value="0.35"/>
+                    <Property Name="EndOfWireHeightAboveNominal" Value="0.5"/>
+                </CustomProperties>
+                <Wires>
+                    <CatenaryWire Area="480" Diameter="9.4" Gauge="50" Tension="12000" Weight="4.41" Material="Cu" Class="B"/>
+                    <ContactWire Area="200" Diameter="10.6" Gauge="80" Tension="12000" Weight="7" Material="Cu" Class="B"/>
+                    <DropperWire Area="120" Diameter="8.56" Gauge="10.5" Tension="3000" Weight="2.32" Material="CuAg" Class="4"/>
+                </Wires>
+                <LookupTableReference>
+                    <Standard TableName="StaggerTable2"/>
+					<Overlap TableName="OverlapTypeSelectionTable"/>
+                </LookupTableReference>
+            </CatenarySystem>
+        </CatenarySystems>
+        <SpacingAlgorithms>
+            <SpacingAlgorithm Name="Table-based Spacing Algorithm" ValueType="Expression" Value="L" IterativeMethod="false" CheckInterval="5" CheckStraights="false">
+                <Variable Name="R" ValueType="Interface" Value="LocationRadius" Description="Radius"/>
+                <Lookup Type="TableName" Value="SpanLengthTable">
+                    <Where Column="Radius" Method="NearestLower" Value="R"/>
+                    <Select Column="SpanLength" Variable="L"/>
+                </Lookup>
+            </SpacingAlgorithm>
+        </SpacingAlgorithms>
+        <HeightStaggerAlgorithms>
+            <HeightStaggerAlgorithm Name="AxialForce" ValueType="Expression" Value="2 * F * Math.Cos(B)" SpanValue="false" DisplayName="Axial Force" DisplayUnit="N" RelaxedMinimum="70" DesiredMinimum="200" DesiredMaximum="600" RelaxedMaximum="900">
+                <Variable Name="F" ValueType="CrossReference" Value="CatenarySystem.Wires.ContactWire.Tension"/>
+                <Variable Name="B" ValueType="Interface" Value="VectorBetweenWireSpans"/>
+            </HeightStaggerAlgorithm>
+        </HeightStaggerAlgorithms>
+        <LookUpTables>
+            <LookUpTableStagger Name="StaggerTable1">
+                <Columns>
+                    <StandardColumn Name="Radius" Type="Long"/>
+                    <StandardColumn Name="Stagger" Type="Double"/>
+                    <StandardColumn Name="MaximumWindBlowoff" Type="Double"/>
+                    <StandardColumn Name="AlternatingStagger" Type="Boolean"/>
+                </Columns>
+                <Rows>
+                    <Row Radius="INFINITE" Stagger="0.2" MaximumWindBlowoff="0.5" AlternatingStagger="true"/>
+                    <Row Radius="20000" Stagger="0.2" MaximumWindBlowoff="0.5" AlternatingStagger="true"/>
+                    <Row Radius="10000" Stagger="0.2" MaximumWindBlowoff="0.5" AlternatingStagger="true"/>
+                    <Row Radius="1700" Stagger="0.2" MaximumWindBlowoff="0.5" AlternatingStagger="true"/>
+                    <Row Radius="1600" Stagger="0.24" MaximumWindBlowoff="0.5" AlternatingStagger="true"/>
+                    <Row Radius="1200" Stagger="0.24" MaximumWindBlowoff="0.5" AlternatingStagger="true"/>
+                    <Row Radius="1100" Stagger="0.24" MaximumWindBlowoff="0.5" AlternatingStagger="false"/>
+                    <Row Radius="1000" Stagger="0.24" MaximumWindBlowoff="0.5" AlternatingStagger="false"/>
+                    <Row Radius="900" Stagger="0.24" MaximumWindBlowoff="0.5" AlternatingStagger="false"/>
+                    <Row Radius="850" Stagger="0.24" MaximumWindBlowoff="0.5" AlternatingStagger="false"/>
+                    <Row Radius="700" Stagger="0.24" MaximumWindBlowoff="0.5" AlternatingStagger="false"/>
+                    <Row Radius="650" Stagger="0.24" MaximumWindBlowoff="0.5" AlternatingStagger="false"/>
+                    <Row Radius="500" Stagger="0.24" MaximumWindBlowoff="0.5" AlternatingStagger="false"/>
+                    <Row Radius="350" Stagger="0.24" MaximumWindBlowoff="0.5" AlternatingStagger="false"/>
+                    <Row Radius="250" Stagger="0.24" MaximumWindBlowoff="0.5" AlternatingStagger="false"/>
+                </Rows>
+            </LookUpTableStagger>
+            <LookUpTableStagger Name="StaggerTable2">
+                <Columns>
+                    <StandardColumn Name="Radius" Type="Long"/>
+                    <StandardColumn Name="Stagger" Type="Double"/>
+                    <StandardColumn Name="MaximumWindBlowoff" Type="Double"/>
+                    <StandardColumn Name="AlternatingStagger" Type="Boolean"/>
+                </Columns>
+                <Rows>
+                    <Row Radius="INFINITE" Stagger="0.4" MaximumWindBlowoff="0.5" AlternatingStagger="true"/>
+                    <Row Radius="20000" Stagger="0.4" MaximumWindBlowoff="0.5" AlternatingStagger="true"/>
+                    <Row Radius="10000" Stagger="0.4" MaximumWindBlowoff="0.5" AlternatingStagger="true"/>
+                    <Row Radius="1700" Stagger="0.3" MaximumWindBlowoff="0.5" AlternatingStagger="true"/>
+                    <Row Radius="1600" Stagger="0.3" MaximumWindBlowoff="0.5" AlternatingStagger="true"/>
+                    <Row Radius="1200" Stagger="0.3" MaximumWindBlowoff="0.5" AlternatingStagger="true"/>
+                    <Row Radius="1100" Stagger="0.3" MaximumWindBlowoff="0.5" AlternatingStagger="true"/>
+                    <Row Radius="1000" Stagger="0.3" MaximumWindBlowoff="0.5" AlternatingStagger="false"/>
+                    <Row Radius="900" Stagger="0.2" MaximumWindBlowoff="0.5" AlternatingStagger="false"/>
+                    <Row Radius="850" Stagger="0.2" MaximumWindBlowoff="0.5" AlternatingStagger="false"/>
+                    <Row Radius="700" Stagger="0.2" MaximumWindBlowoff="0.5" AlternatingStagger="false"/>
+                    <Row Radius="650" Stagger="0.2" MaximumWindBlowoff="0.5" AlternatingStagger="false"/>
+                    <Row Radius="500" Stagger="0.2" MaximumWindBlowoff="0.5" AlternatingStagger="false"/>
+                    <Row Radius="350" Stagger="0.2" MaximumWindBlowoff="0.5" AlternatingStagger="false"/>
+                    <Row Radius="250" Stagger="0.2" MaximumWindBlowoff="0.5" AlternatingStagger="false"/>
+                </Rows>
+            </LookUpTableStagger>
+            <LookUpTableOverlap Name="OverlapTableA" NumberOfSpans="3" Type="UnInsulated">
+                <Columns>
+                    <StandardColumn Name="Serial" Type="Long"/>
+                    <StandardColumn Name="SpanLength" Type="Double"/>
+                    <StandardColumn Name="InStagger" Type="Double"/>
+                    <StandardColumn Name="InContactHeight" Type="Double"/>
+                    <StandardColumn Name="InEncumbrance" Type="Double"/>
+                    <StandardColumn Name="OutStagger" Type="Double"/>
+                    <StandardColumn Name="OutContactHeight" Type="Double"/>
+                    <StandardColumn Name="OutEncumbrance" Type="Double"/>
+                </Columns>
+                <Rows>					
+					<Radius Value="1600">
+                        <Row Serial="1" SpanLength="54" InStagger="0.2" InEncumbrance="1.4" InContactHeight="5.75" OutStagger="-3.25" OutEncumbrance="0.5" OutContactHeight="6.65"/>
+						<Row Serial="2" SpanLength="54" InStagger="0" InEncumbrance="1.4" InContactHeight="5.75" OutStagger="-0.2" OutEncumbrance="1.4" OutContactHeight="5.75"/>
+						<Row Serial="3" SpanLength="54" InStagger="0.2" InEncumbrance="1.4" InContactHeight="5.75" OutStagger="0" OutEncumbrance="1.4" OutContactHeight="5.75"/>
+						<Row Serial="4" SpanLength="54" InStagger="-3.25" InEncumbrance="0.5" InContactHeight="6.65" OutStagger="-0.2" OutEncumbrance="1.4" OutContactHeight="5.75"/>
+                    </Radius>					
+					<Radius Value="1200">
+                        <Row Serial="1" SpanLength="49.5" InStagger="0.2" InEncumbrance="1.4" InContactHeight="5.75" OutStagger="-3.25" OutEncumbrance="0.5" OutContactHeight="6.65"/>
+						<Row Serial="2" SpanLength="49.5" InStagger="0" InEncumbrance="1.4" InContactHeight="5.75" OutStagger="-0.2" OutEncumbrance="1.4" OutContactHeight="5.75"/>
+						<Row Serial="3" SpanLength="49.5" InStagger="0.2" InEncumbrance="1.4" InContactHeight="5.75" OutStagger="0" OutEncumbrance="1.4" OutContactHeight="5.75"/>
+						<Row Serial="4" SpanLength="49.5" InStagger="-3.25" InEncumbrance="0.5" InContactHeight="6.65" OutStagger="-0.2" OutEncumbrance="1.4" OutContactHeight="5.75"/>
+                    </Radius>
+                </Rows>
+            </LookUpTableOverlap>
+            
+            <LookUpTableOverlap Name="OverlapTableB" NumberOfSpans="4" Type="UnInsulated">
+                <Columns>
+                    <StandardColumn Name="Serial" Type="Long"/>
+                    <StandardColumn Name="SpanLength" Type="Double"/>
+                    <StandardColumn Name="InStagger" Type="Double"/>
+                    <StandardColumn Name="InContactHeight" Type="Double"/>
+                    <StandardColumn Name="InEncumbrance" Type="Double"/>
+                    <StandardColumn Name="OutStagger" Type="Double"/>
+                    <StandardColumn Name="OutContactHeight" Type="Double"/>
+                    <StandardColumn Name="OutEncumbrance" Type="Double"/>
+                </Columns>
+                <Rows>
+                    <Radius Value="850">
+						<Row Serial="1" SpanLength="45" InStagger="-0.24" InEncumbrance="1.4" InContactHeight="5.75" OutStagger="-3.25" OutEncumbrance="0.5" OutContactHeight="6.65"/>
+                        <Row Serial="2" SpanLength="45" InStagger="-0.15" InEncumbrance="1.4" InContactHeight="5.75" OutStagger="-0.4" OutEncumbrance="0.9" OutContactHeight="6.25"/>
+						<Row Serial="3" SpanLength="45" InStagger="0.00" InEncumbrance="1.4" InContactHeight="5.75" OutStagger="-0.25" OutEncumbrance="1.4" OutContactHeight="5.75"/>
+						<Row Serial="4" SpanLength="45" InStagger="0.1" InEncumbrance="0.9" InContactHeight="6.25" OutStagger="-0.15" OutEncumbrance="1.4" OutContactHeight="5.75"/>
+						<Row Serial="5" SpanLength="45" InStagger="-3.25 " InEncumbrance="0.5" InContactHeight="6.65" OutStagger="-0.24" OutEncumbrance="1.4" OutContactHeight="5.75"/>
+                    </Radius>
+                     <Radius Value="500">
+                        <Row Serial="1" SpanLength="36" InStagger="-0.24" InEncumbrance="1.4" InContactHeight="5.75" OutStagger="-3.25" OutEncumbrance="0.5" OutContactHeight="6.65"/>
+						<Row Serial="2" SpanLength="36" InStagger="-0.15" InEncumbrance="1.4" InContactHeight="5.75" OutStagger="-0.4" OutEncumbrance="0.9" OutContactHeight="6.25"/>
+						<Row Serial="3" SpanLength="36" InStagger="0.00" InEncumbrance="1.4" InContactHeight="5.75" OutStagger="-0.25" OutEncumbrance="1.4" OutContactHeight="5.75"/>
+						<Row Serial="4" SpanLength="36" InStagger="0.1" InEncumbrance="0.9" InContactHeight="6.25" OutStagger="-0.15" OutEncumbrance="1.4" OutContactHeight="5.75"/>
+						<Row Serial="5" SpanLength="36" InStagger="-3.25 " InEncumbrance="0.5" InContactHeight="6.65" OutStagger="-0.24" OutEncumbrance="1.4" OutContactHeight="5.75"/>                       
+                    </Radius>
+                </Rows>
+            </LookUpTableOverlap>
+            
+            <LookUpTableOverlap Name="OverlapTableC" NumberOfSpans="5" Type="UnInsulated">
+                <Columns>
+                    <StandardColumn Name="Serial" Type="Long"/>
+                    <StandardColumn Name="SpanLength" Type="Double"/>
+                    <StandardColumn Name="InStagger" Type="Double"/>
+                    <StandardColumn Name="InContactHeight" Type="Double"/>
+                    <StandardColumn Name="InEncumbrance" Type="Double"/>
+                    <StandardColumn Name="OutStagger" Type="Double"/>
+                    <StandardColumn Name="OutContactHeight" Type="Double"/>
+                    <StandardColumn Name="OutEncumbrance" Type="Double"/>
+                </Columns>
+                <Rows>
+                    <Radius Value="0">
+						<Row Serial="1" SpanLength="27" InStagger="-0.24" InEncumbrance="1.4" InContactHeight="5.75" OutStagger="-3.25" OutEncumbrance="0.5" OutContactHeight="6.65"/>
+                        <Row Serial="2" SpanLength="27" InStagger="-0.05" InEncumbrance="1.4" InContactHeight="5.75" OutStagger="-0.55" OutEncumbrance="0.9" OutContactHeight="6.25"/>
+						<Row Serial="3" SpanLength="27" InStagger="0.25" InEncumbrance="1.4" InContactHeight="5.75" OutStagger="-0.25" OutEncumbrance="1.25" OutContactHeight="5.75"/>
+						<Row Serial="4" SpanLength="27" InStagger="0.25" InEncumbrance="1.25" InContactHeight="5.75" OutStagger="-0.25" OutEncumbrance="1.4" OutContactHeight="5.75"/>
+						<Row Serial="5" SpanLength="27" InStagger="0.25" InEncumbrance="0.9" InContactHeight="6.25" OutStagger="-0.25" OutEncumbrance="1.4" OutContactHeight="5.75"/>
+						<Row Serial="6" SpanLength="27" InStagger="-3.25 " InEncumbrance="0.5" InContactHeight="6.65" OutStagger="-0.24" OutEncumbrance="1.4" OutContactHeight="5.75"/> 				
+                    </Radius>
+                </Rows>
+            </LookUpTableOverlap>
+            
+            <LookUpTableOverlap Name="Tabell 8.7" NumberOfSpans="5" Type="Insulated">
+                <Columns>
+                    <StandardColumn Name="Serial" Type="Long"/>
+                    <StandardColumn Name="SpanLength" Type="Double"/>
+                    <StandardColumn Name="InStagger" Type="Double"/>
+                    <StandardColumn Name="InContactHeight" Type="Double"/>
+                    <StandardColumn Name="InEncumbrance" Type="Double"/>
+                    <StandardColumn Name="OutStagger" Type="Double"/>
+                    <StandardColumn Name="OutContactHeight" Type="Double"/>
+                    <StandardColumn Name="OutEncumbrance" Type="Double"/>
+                </Columns>
+                <Rows>
+                    <Radius Value="INFINITE">
+                        <Row Serial="1" SpanLength="60" InStagger="0.3" InEncumbrance="1.75" InContactHeight="5.5" OutStagger="0.1" OutEncumbrance="1.75" OutContactHeight="5.5"/>
+                        <Row Serial="2" SpanLength="54" InStagger="0.3" InEncumbrance="1.75" InContactHeight="5.5" OutStagger="0.3" OutEncumbrance="1.75" OutContactHeight="5.5"/>
+                        <Row Serial="3" SpanLength="60" InStagger="0.3" InEncumbrance="1.75" InContactHeight="5.5" OutStagger="0.3" OutEncumbrance="1.75" OutContactHeight="5.5"/>
+                        <Row Serial="4" SpanLength="60" InStagger="0.3" InEncumbrance="1.75" InContactHeight="5.5" OutStagger="0.1" OutEncumbrance="1.75" OutContactHeight="5.5"/>
+                        <Row Serial="5" SpanLength="50" InStagger="0.3" InEncumbrance="1.75" InContactHeight="5.5" OutStagger="0.1" OutEncumbrance="1.75" OutContactHeight="5.5"/>
+                        <Row Serial="6" SpanLength="50" InStagger="0.3" InEncumbrance="1.75" InContactHeight="5.5" OutStagger="0.1" OutEncumbrance="1.75" OutContactHeight="5.5"/>
+                    </Radius>
+                    <Radius Value="1200">
+                        <Row Serial="1" SpanLength="60" InStagger="0.3" InEncumbrance="1.75" InContactHeight="5.5" OutStagger="0.4" OutEncumbrance="1.75" OutContactHeight="5.5"/>
+                        <Row Serial="2" SpanLength="40" InStagger="0.3" InEncumbrance="1.75" InContactHeight="5.5" OutStagger="0.0" OutEncumbrance="1.75" OutContactHeight="5.5"/>
+                        <Row Serial="3" SpanLength="60" InStagger="0.3" InEncumbrance="1.75" InContactHeight="5.5" OutStagger="0.0" OutEncumbrance="1.75" OutContactHeight="5.5"/>
+                        <Row Serial="4" SpanLength="60" InStagger="0.3" InEncumbrance="1.75" InContactHeight="5.5" OutStagger="0.1" OutEncumbrance="1.75" OutContactHeight="5.5"/>
+                        <Row Serial="5" SpanLength="32" InStagger="0.3" InEncumbrance="1.75" InContactHeight="5.5" OutStagger="0.1" OutEncumbrance="1.75" OutContactHeight="5.5"/>
+                        <Row Serial="6" SpanLength="42" InStagger="0.3" InEncumbrance="1.75" InContactHeight="5.5" OutStagger="0.1" OutEncumbrance="1.75" OutContactHeight="5.5"/>
+                    </Radius>
+                </Rows>
+            </LookUpTableOverlap>
+            <LookUpTable Name="SpanLengthTable">
+                <Columns>
+                    <CustomColumn Name="Radius" Type="Long"/>
+                    <CustomColumn Name="SpanLength" Type="Double"/>
+                </Columns>
+                <Rows>
+                    <Row Radius="INFINITE" SpanLength="54"/>
+                    <Row Radius="20000" SpanLength="54"/>
+                    <Row Radius="10000" SpanLength="54"/>
+                    <Row Radius="1700" SpanLength="54"/>
+                    <Row Radius="1600" SpanLength="54"/>
+                    <Row Radius="1200" SpanLength="49.5"/>
+                    <Row Radius="1100" SpanLength="49.5"/>
+                    <Row Radius="1000" SpanLength="45"/>
+                    <Row Radius="900" SpanLength="45"/>
+                    <Row Radius="850" SpanLength="45"/>
+                    <Row Radius="700" SpanLength="40.5"/>
+                    <Row Radius="650" SpanLength="40.5"/>
+                    <Row Radius="500" SpanLength="36"/>
+                    <Row Radius="350" SpanLength="31.5"/>
+                    <Row Radius="250" SpanLength="27"/>
+                    <Row Radius="0" SpanLength="25"/>
+                </Rows>
+            </LookUpTable>
+            <LookUpTable Name="OverlapTypeSelectionTable">
+                <Columns>
+                    <StandardColumn Name="Radius" Type="Long"/>
+                    <StandardColumn Name="OverlapTable" Type="String"/>
+                </Columns>
+                <Rows>
+                    <Row Radius="1200" OverlapTable="OverlapTableA"/>
+                    <Row Radius="500" OverlapTable="OverlapTableB"/>
+					<Row Radius="0" OverlapTable="OverlapTableC"/>
+                </Rows>
+            </LookUpTable>
+        </LookUpTables>
+        <TurnOuts>
+          <TurnOut Name="u300_9" Description="UIC 60 - 300 1:9" Position="800" OffsetToPosition="21.90"/>
+        </TurnOuts>
+    </DesignRuleSet>
+</DesignRuleDoc>
+
+
+
+
+
+
+

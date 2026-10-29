@@ -1,0 +1,9 @@
+The Highway and SignCAD fonts are provided with the following applications.
+A valid license of at least of these applications is required on all machines that use these fonts.
+
+OpenSite Designer
+OpenRoads Designer
+OpenRoads SignCAD
+OpenRail Designer
+OpenRail Overhead Line Designer
+OpenBridge Designer

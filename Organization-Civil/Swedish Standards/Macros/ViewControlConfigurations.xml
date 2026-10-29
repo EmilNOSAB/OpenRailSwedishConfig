@@ -1,0 +1,54 @@
+<?xml version="1.0" standalone="no"?>
+<ViewControlConfigurations version="1.0">
+  <Configuration name="Plan">
+    <View number="1" percentTop="0" percentBottom="100" percentLeft="0" percentRight="100"/>
+  </Configuration>
+  <Configuration name="Plan3D">
+    <View number="1" percentTop="0" percentBottom="100" percentLeft="0" percentRight="55"/>
+    <View number="2" percentTop="0" percentBottom="100" percentLeft="55" percentRight="100"/>
+  </Configuration>
+  <Configuration name="PlanProf3D">
+    <View number="1" percentTop="0" percentBottom="57" percentLeft="0" percentRight="50"/>
+    <View number="3" percentTop="0" percentBottom="57" percentLeft="50" percentRight="100"/>
+    <View number="4" percentTop="57" percentBottom="100" percentLeft="0" percentRight="100"/>
+  </Configuration>
+  <Configuration name="PlanProfile">
+    <View number="1" percentTop="0" percentBottom="57" percentLeft="0" percentRight="100"/>
+    <View number="4" percentTop="57" percentBottom="100" percentLeft="0" percentRight="100"/>
+  </Configuration>
+  <Configuration name="PlanSE">
+    <View number="1" percentTop="0" percentBottom="50" percentLeft="0" percentRight="100"/>
+    <View number="8" percentTop="50" percentBottom="100" percentLeft="0" percentRight="100"/>
+  </Configuration>
+  <Configuration name="PlanXS">
+    <View number="1" percentTop="0" percentBottom="57" percentLeft="0" percentRight="100"/>
+    <View number="8" percentTop="57" percentBottom="100" percentLeft="0" percentRight="100"/>
+  </Configuration>
+  <Configuration name="PlanXS3D">
+    <View number="1" percentTop="0" percentBottom="100" percentLeft="0" percentRight="55"/>
+    <View number="3" percentTop="0" percentBottom="50" percentLeft="55" percentRight="100"/>
+    <View number="7" percentTop="50" percentBottom="100" percentLeft="55" percentRight="100"/>
+  </Configuration>
+  <Configuration name="PlanProfileXS">
+    <View number="1" percentTop="0" percentBottom="57" percentLeft="0" percentRight="50"/>
+    <View number="5" percentTop="57" percentBottom="100" percentLeft="0" percentRight="100"/>
+    <View number="7" percentTop="0" percentBottom="57" percentLeft="50" percentRight="100"/>
+  </Configuration>
+  <Configuration name="PlanSuperXS">
+    <View number="1" percentTop="0" percentBottom="57" percentLeft="0" percentRight="50"/>
+    <View number="5" percentTop="57" percentBottom="100" percentLeft="0" percentRight="100"/>
+    <View number="7" percentTop="0" percentBottom="57" percentLeft="50" percentRight="100"/>
+  </Configuration>
+  <Configuration name="FourSquare">
+    <View number="1" percentTop="0" percentBottom="50" percentLeft="0" percentRight="50"/>
+    <View number="3" percentTop="0" percentBottom="50" percentLeft="50" percentRight="100"/>
+    <View number="5" percentTop="50" percentBottom="100" percentLeft="0" percentRight="50"/>
+    <View number="7" percentTop="50" percentBottom="100" percentLeft="50" percentRight="100"/>
+  </Configuration>
+  <Configuration name="3DCell">
+    <View number="1" percentTop="0" percentBottom="50" percentLeft="0" percentRight="50" orientation="TOP" rendering="WIREFRAME"/>
+    <View number="2" percentTop="0" percentBottom="50" percentLeft="50" percentRight="100" orientation="ISO" rendering="SMOOTH"/>
+    <View number="3" percentTop="50" percentBottom="100" percentLeft="0" percentRight="50" orientation="FRONT" rendering="WIREFRAME"/>
+    <View number="4" percentTop="50" percentBottom="100" percentLeft="50" percentRight="100" orientation="RIGHT" rendering="WIREFRAME"/>
+  </Configuration>
+</ViewControlConfigurations>
