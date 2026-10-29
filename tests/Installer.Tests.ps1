@@ -1,4 +1,4 @@
-param([string]$Installer = (Join-Path $PSScriptRoot '..\Installera_OpenRail_Konfig.bat'))
+﻿param([string]$Installer = (Join-Path $PSScriptRoot '..\Installera_OpenRail_Konfig.bat'))
 $ErrorActionPreference = 'Stop'
 $source = [IO.File]::ReadAllText((Resolve-Path -LiteralPath $Installer))
 $code = $source.Substring($source.LastIndexOf('##' + 'POWERSHELL##'))
@@ -35,6 +35,16 @@ function New-TestZip([string]$Path, $Entries) {
     } finally { $zip.Dispose() }
 }
 try {
+    # Exercise the BAT entry point in a fresh process. An invalid year stops
+    # before downloads, configuration copies, or changes to the user's prefs.
+    Push-Location -LiteralPath (Split-Path -Parent (Resolve-Path -LiteralPath $Installer).Path)
+    try {
+        $launcherOutput = & $env:ComSpec /d /c ('"' + (Split-Path -Leaf $Installer) + '" invalid --no-pause')
+        $launcherExit = $LASTEXITCODE
+    } finally { Pop-Location }
+    Assert ($launcherExit -eq 1) 'BAT returns a failure exit code for an invalid year'
+    Assert (($launcherOutput -join "`n") -match 'Ange en version från 2023') 'BAT loads the entry function and reaches version validation'
+
     $configPath = Join-Path $testRoot 'installed\Swedish Standards Rail'
     $examplePath = Join-Path $testRoot 'BentleyExamples'
     [void][IO.Directory]::CreateDirectory($examplePath)
@@ -61,17 +71,30 @@ try {
     Assert ($doc.DocumentElement.GetAttribute('marker') -eq 'keep-root-attribute') 'Root attributes are preserved'
     Assert ($doc.SelectNodes('//comment()').Count -eq 1) 'Comments are preserved'
     Assert ($doc.DocumentElement.LastChild.IsSelected -eq 'false') 'New entry does not change existing selection'
+    Assert ($doc.DocumentElement.LastChild.Title -eq 'BJP26') 'Configuration uses the BJP26 display name'
+    Assert ($doc.DocumentElement.LastChild.ConfigurationVariable -eq '_USTN_CONFIG_SWEDISH_STANDARDS_RAIL') 'Configuration variable is retained'
     Assert ([IO.File]::ReadAllText($result.Backup) -ceq $original) 'XML backup contains the original file'
     $afterFirstRun = [IO.File]::ReadAllText($xmlPath)
     $again = Registrera-Konfiguration $xmlPath ($configPath.ToLowerInvariant().Replace('\', '/') + '/') $examplePath
     Assert (-not $again.Changed) 'Repeated installation recognizes the same normalized path'
     Assert ([IO.File]::ReadAllText($xmlPath) -ceq $afterFirstRun) 'Repeated run does not rewrite XML or add duplicates'
 
+    $legacyXml = Join-Path $testRoot 'legacy\configuration.xml'
+    $legacyContent = $afterFirstRun.Replace('<Title>BJP26</Title>', '<Title>Swedish Standards Rail</Title>')
+    Write-TestFile $legacyXml $legacyContent
+    $renamed = Registrera-Konfiguration $legacyXml $configPath $examplePath
+    $renamedDoc = Las-KonfigXml $legacyXml
+    Assert ($renamed.Changed -and $renamed.Title -eq 'BJP26') 'Previous default display name is migrated to BJP26'
+    Assert ($renamedDoc.DocumentElement.SelectNodes('ConfigurationModel').Count -eq 2) 'Renaming does not add a duplicate'
+    Assert ($renamedDoc.DocumentElement.LastChild.OuterXml -ceq $doc.DocumentElement.LastChild.OuterXml) 'Renaming preserves every other field of the existing configuration'
+    Assert ([IO.File]::ReadAllText($renamed.Backup) -ceq $legacyContent) 'Renaming backs up the original XML'
+    Assert (-not (Registrera-Konfiguration $legacyXml $configPath $examplePath).Changed) 'Repeated install after renaming does not rewrite XML'
+
     $collisionXml = Join-Path $testRoot 'collision\configuration.xml'
-    Write-TestFile $collisionXml ($original.Replace('Other company', 'Swedish Standards Rail').Replace('_USTN_CONFIG_OTHER', '_USTN_CONFIG_SWEDISH_STANDARDS_RAIL'))
+    Write-TestFile $collisionXml ($original.Replace('Other company', 'BJP26').Replace('_USTN_CONFIG_OTHER', '_USTN_CONFIG_SWEDISH_STANDARDS_RAIL'))
     $collisionNode = (Las-KonfigXml $collisionXml).DocumentElement.SelectSingleNode('ConfigurationModel').OuterXml
     $collision = Registrera-Konfiguration $collisionXml $configPath $examplePath
-    Assert ($collision.Title -eq 'Swedish Standards Rail (2)') 'Name/variable collision creates a distinct entry'
+    Assert ($collision.Title -eq 'BJP26 (2)') 'Name/variable collision creates a distinct entry'
     Assert ((Las-KonfigXml $collisionXml).DocumentElement.FirstChild.NextSibling.OuterXml -ceq $collisionNode) 'Collision does not modify the other configuration'
 
     $newXml = Join-Path $testRoot 'new-profile\configuration.xml'
@@ -129,6 +152,58 @@ try {
     Assert ([IO.File]::ReadAllText((Join-Path $installed.Backup 'Organization\standards.cfg')) -eq '# local previous version') 'Replaced files are backed up'
     Assert ([IO.File]::ReadAllText((Join-Path $installDest 'WorkSpaces\MyProject\drawing.dgn')) -eq 'user project data') 'Additional project files are preserved'
     Assert ((Installera-Filer $staging $installDest).Files -eq 0) 'Unchanged files are not rewritten on repeat runs'
+
+    # Run the administrator helper in a real child PowerShell process, replacing
+    # only the permission check and UAC launch so all writes stay in testRoot.
+    $savedWriteCheck = ${function:Kan-Skriva}
+    try {
+        function Kan-Skriva { return $false }
+        function Start-Process {
+            param($FilePath, $ArgumentList, $Verb, $WindowStyle, [switch]$Wait, [switch]$PassThru)
+            Microsoft.PowerShell.Management\Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -WindowStyle Hidden -Wait -PassThru
+        }
+        $helperDest = Join-Path $testRoot 'helper-destination'
+        $helperResult = Installera-MedBehorighet $staging $helperDest (Resolve-Path -LiteralPath $Installer).Path (Join-Path $testRoot 'helper-result.json')
+        Assert ($helperResult.Files -eq 4) 'Administrator helper loads functions in its child process and copies files'
+        Assert ([IO.File]::ReadAllText((Join-Path $helperDest 'WorkSpaceSetup.cfg')) -eq '# setup') 'Administrator helper installs the expected content'
+    } finally {
+        Set-Item -LiteralPath function:Kan-Skriva -Value $savedWriteCheck
+        Remove-Item -LiteralPath function:Start-Process
+    }
+
+    $lvaSource = Join-Path $testRoot 'lva-source'
+    $lvaDest = Join-Path $testRoot 'lva-destination'
+    Write-TestFile (Join-Path $lvaSource 'Organization-Civil\LVA.cfg') '# local LVA'
+    $stockCell = 'Organization-Civil\Swedish Standards\Cell\LV Assets 3D.cel'
+    $stockItemTypes = 'Organization-Civil\Swedish Standards\Dgnlib\Feature Definitions\Rail\LV Assets Item Types.dgnLib'
+    Write-TestFile (Join-Path $lvaDest $stockCell) 'previous stock cells'
+    Write-TestFile (Join-Path $lvaDest $stockItemTypes) 'previous stock item types'
+    Write-TestFile (Join-Path $lvaDest 'WorkSpaces\MyProject\drawing.dgn') 'keep project data'
+    [void](Installera-Filer $lvaSource $lvaDest)
+    Assert (Test-Path -LiteralPath (Join-Path $lvaDest $stockCell)) 'Incomplete replacement never retires stock LVA'
+    foreach ($code in @('BANA', 'BELYSNING', 'KANALISATION', 'KONTAKTLEDNING', 'LSP', 'TELE')) {
+        Write-TestFile (Join-Path $lvaSource ('Organization-Civil\LVA\Dgnlib\NCAD-OR-STANDARDS-{0}.dgnlib' -f $code)) 'new standards'
+        Write-TestFile (Join-Path $lvaSource ('Organization-Civil\LVA\Cell\2D\NCAD-OR-CELL2D-{0}.cel' -f $code)) 'new 2D cells'
+        Write-TestFile (Join-Path $lvaSource ('Organization-Civil\LVA\Cell\3D\NCAD-OR-CELL3D-{0}.cel' -f $code)) 'new 3D cells'
+    }
+    $lvaInstall = Installera-Filer $lvaSource $lvaDest
+    Assert (-not (Test-Path -LiteralPath (Join-Path $lvaDest $stockCell))) 'Complete LVA replacement removes stock cells'
+    Assert (-not (Test-Path -LiteralPath (Join-Path $lvaDest $stockItemTypes))) 'Complete LVA replacement removes stock Item Types'
+    Assert ([IO.File]::ReadAllText((Join-Path $lvaInstall.Backup $stockCell)) -eq 'previous stock cells') 'Retired stock library is backed up'
+    Assert ([IO.File]::ReadAllText((Join-Path $lvaDest 'WorkSpaces\MyProject\drawing.dgn')) -eq 'keep project data') 'LVA migration preserves project files'
+    Assert ((Installera-Filer $lvaSource $lvaDest).Files -eq 0) 'Repeated LVA migration makes no further changes'
+
+    # A failure after one retirement restores both the retired file and copies.
+    $lvaRollback = Join-Path $testRoot 'lva-rollback'
+    $lockedCell = 'Organization-Civil\Swedish Standards\Cell\LV Assets Annotations.cel'
+    Write-TestFile (Join-Path $lvaRollback $stockCell) 'restore these cells'
+    Write-TestFile (Join-Path $lvaRollback $lockedCell) 'locked library'
+    $lock = [IO.File]::Open((Join-Path $lvaRollback $lockedCell), [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
+    try {
+        Assert-Throws { Installera-Filer $lvaSource $lvaRollback } 'Locked stock library fails the migration'
+    } finally { $lock.Dispose() }
+    Assert ([IO.File]::ReadAllText((Join-Path $lvaRollback $stockCell)) -eq 'restore these cells') 'Migration rollback restores an already retired stock library'
+    Assert (-not (Test-Path -LiteralPath (Join-Path $lvaRollback 'Organization-Civil\LVA.cfg'))) 'Migration rollback removes newly copied files'
 
     $rollbackSource = Join-Path $testRoot 'rollback-source'
     $rollbackDest = Join-Path $testRoot 'rollback-destination'
