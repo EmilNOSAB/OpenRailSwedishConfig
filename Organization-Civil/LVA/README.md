@@ -1,51 +1,54 @@
 # LVA i BJP26
 
 Välj konfiguration **BJP26**, WorkSpace **Swedish Standards** och WorkSet
-**Swedish Rail** i OpenRail Designer 2026. Dina lokala NCAD LVA-bibliotek laddas
-nu i det ursprungliga WorkSpacet. Något separat test-WorkSpace behövs inte.
+**Swedish Rail** i OpenRail Designer 2026.
 
-WorkSpacet laddar svenska järnvägsstandarder och dina LVA-standardbibliotek,
-elementmallar, nivåer och cellbibliotek. Bentleys standardbibliotek för LVA har
-tagits bort ur paketet: två DGNLIB-filer, fyra cellbibliotek och den tillhörande
-LV_Status-uppslagstabellen. Installationsskriptet säkerhetskopierar och tar bort
-dessa sju filer vid uppdatering när hela ersättningen finns i paketet. Övriga
-järnvägsbibliotek, designfrön och mallbibliotek finns kvar.
+## LVA från ConnectConfiguration
 
-## Innehåll
+Sju resurser har kopierats från `C:\ConnectConfiguration` till motsvarande
+mappar i `Organization-Civil/Swedish Standards`:
 
-Sex teknikområden laddas: Bana, Belysning, Kanalisation, Kontaktledning,
-Lågspänning och Tele. Varje område har ett standardbibliotek och två
-cellbibliotek, för 2D respektive 3D.
+- `Cell/LV Assets 3D.cel`
+- `Cell/LV Assets Annotations.cel`
+- `Cell/LV Assets Plan.cel`
+- `Cell/LV Assets Sch.cel`
+- `Dgnlib/Feature Definitions/Rail/LV Assets Item Types.dgnLib`
+- `Dgnlib/Feature Definitions/Rail/LVA Rail Settings Features Annotations Levels Elem Temp Metric.dgnLib`
+- `Dgnlib/Item Types/LV_Status.xlsx`
 
-Källfilerna var sparade som `.dgn`. Enligt den medföljande instruktionen ska
-standardbiblioteken heta `.dgnlib` och cellbiblioteken `.cel`. De lokala kopiorna
-har därför dessa filändelser; filinnehållet är identiskt med källan och har
-kontrollerats med SHA-256. Detta ändrar inte filernas modeller eller geometri.
+Biblioteken laddas genom de befintliga sökvägarna för svenska järnvägsstandarder.
+`LV_Status.xlsx` är åter ansluten som `ITEMTYPE_LOOKUP`. Kopiornas SHA-256 är
+identiska med källfilerna. Installationsskriptet behåller nu dessa resurser även
+när hela NCAD-paketet ingår. Det tidigare borttagningssteget är borttaget.
 
-Signal ligger under **Arbete pågår** i källan. Dessa tre bibliotek finns i
+## Svenska sektionsmallar och kabelrännor
+
+Standardbiblioteket för järnväg är **Templatesbibliotek_TRV - Remapped.itl**,
+med 153 mallar. Under **Komponenter, kanalisation** finns 12 kabelrännemallar,
+bland annat `Kabelränna_350`, `Kabelränna_520`, `Kabelränna_535`,
+`Kabelränna_560`, `Kabelränna_720` och `Kabelränna_880` samt varianter för
+bangård och linjesektion. Originalbiblioteket och Bentleys ITL-filer finns kvar.
+
+Starta om OpenRail efter uppdateringen. Om en mallväljare i en befintlig session
+fortfarande visar `OpenRail Templates Metric.itl`, öppna
+`Organization-Civil/Swedish Standards/Template Library/Templatesbibliotek_TRV - Remapped.itl`
+i mallbibliotekets öppna-dialog.
+
+## NCAD-bibliotek
+
+`Organization-Civil/LVA.cfg` lägger också till 18 NCAD-bibliotek från sex
+teknikområden: Bana, Belysning, Kanalisation, Kontaktledning, Lågspänning och
+Tele. Varje område har ett standardbibliotek och två cellbibliotek, för 2D och
+3D. Källfilerna var sparade som `.dgn`; kopiornas ändelser har ändrats till
+`.dgnlib` och `.cel` utan ändring av byteinnehållet.
+
+Signal ligger under **Arbete pågår** i NCAD-källan. Dess tre bibliotek finns i
 `Experimental/Signal` och är avstängda från början. För att prova dem, ändra
-`BJP26_LVA_ENABLE_SIGNAL : 0` till `BJP26_LVA_ENABLE_SIGNAL : 1` i
-`Organization-Civil/LVA.cfg` och ladda om WorkSpacet.
+`BJP26_LVA_ENABLE_SIGNAL : 0` till `BJP26_LVA_ENABLE_SIGNAL : 1` i `LVA.cfg`.
 
-Äldre versioner under OLD, samlingen Befintliga celler och mötesinspelningen
-ingår inte. NCAD-biblioteken är de resurser som laddas.
-Att ett bibliotek ligger i en teknikmapp innebär inte att objekten är granskade.
-Konfigurationsändringen innebär inte att alla objekt har kvalitetsgranskats.
+NCAD-källans LOI- och statusarbetsböcker distribueras inte och registreras inte
+som uppslagstabeller. Ett separat NC-OR-ItemTypeLib-bibliotek saknas i den källan.
+Detta gäller inte de återställda ConnectConfiguration-resurserna ovan.
 
-## Dokumentation och återstående kontroll
-
-Källmaterialets arbetsdokument, LOI- och statuskalkylblad distribueras inte
-i detta paket och registreras inte som Bentley-uppslagstabeller. Ett separat
-NC-OR-ItemTypeLib-bibliotek ingår inte.
-Eventuella Item Types som redan finns inbäddade i standardbiblioteken kan laddas.
-
-Konfigurationskontroll och filkontroll kan inte bekräfta alla funktioner i
-binärbiblioteken. Prova objekten i en ny testfil: kontrollera att Feature
-Definitions och 2D-/3D-elementmallar visas, att cellerna placeras med rätt
-geometri och insättningspunkt, samt att nivåer, attribut och eventuella interna
-referenser fungerar. Källans instruktion om unika cellnamn måste också
-kontrolleras mot de redan inlästa biblioteken.
-
-Installationsskriptets säkerhetskopior av ersatta eller pensionerade filer
-finns under `_installer-backups` i konfigurationsroten. Personliga inställningar,
-projektfiler, lokala kontrollrapporter och arbetsdokument ingår inte i paketet.
+Kontroll av resurslistor och filinnehåll ersätter inte placeringsprov av alla
+bibliotekens objekt, geometri, insättningspunkter och attribut.

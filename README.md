@@ -19,9 +19,8 @@ Files are installed in `C:\Swedish Standards Rail`. Existing extra files and
 WorkSets are retained. Changed files are backed up under `_installer-backups`,
 and a copy failure rolls back files changed by that run. If needed, Windows asks
 for administrator access only for copying configuration files into `C:\`.
-When all 18 replacement NCAD libraries are present in the package, updates also
-back up and retire the seven supplied stock LVA resources. Incomplete packages
-leave those resources in place. Unrelated additional files remain untouched.
+The seven LVA resources from `C:\ConnectConfiguration` are included alongside
+the 18 NCAD libraries. Updates retain both sets and back up changed files.
 
 The installer then opens the current user's existing
 `%LOCALAPPDATA%\Bentley\OpenRailDesigner\26.0.0\prefs\configuration.xml`
@@ -73,11 +72,14 @@ Bentley's installed ConfigurationSetup.cfg does not need to be edited for this m
 - `Organization-Civil/LVA.cfg` loads the local NCAD LVA libraries in the original
   **Swedish Standards** WorkSpace and **Swedish Rail** WorkSet. Six disciplines
   supply 18 active libraries; experimental Signal libraries are included but
-  disabled by default. The stock LVA resources are removed from the package.
+  disabled by default. The seven ConnectConfiguration LVA resources are also
+  included in `Organization-Civil/Swedish Standards` and loaded by its CFG.
   See `Organization-Civil/LVA/README.md`.
 
-The existing `OpenRail Templates Metric.itl` default is preserved. The supplied
-TRV template libraries remain available to choose in OpenRail. Rail dimensions,
+The default rail template library is `Templatesbibliotek_TRV - Remapped.itl`.
+It contains 153 Swedish templates, including 12 cable trough templates under
+`Komponenter, kanalisation`. The original TRV and Bentley libraries remain
+available to choose in OpenRail. Rail dimensions,
 cant settings, seed model names, and the contents of binary design libraries are
 preserved. The invalid imperial superelevation rule reference now uses the supplied
 `AASHTO_2018_metric.xml`; this is the existing AASHTO road rule, not a Swedish rail
@@ -103,8 +105,9 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tests\Installer.Tests.
 These checks use isolated temporary folders. They cover existing XML entry and
 selection preservation, BJP26 naming and migration, repeated installs, name
 collisions, new profiles, malformed XML, ZIP layouts and exclusions, traversal
-rejection, the BAT and administrator entry points, LVA migration, backups and
-rollback, including a locked stock library during migration.
+rejection, the BAT and administrator entry points, combined NCAD and
+ConnectConfiguration LVA installation, backups and rollback, including a locked
+LVA library during an update.
 Local `_backup`, `_validation`, `_installer-backups`, preferences, and generated
 ZIPs are excluded from Git.
 

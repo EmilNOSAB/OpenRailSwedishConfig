@@ -16,3 +16,24 @@ WorkSpaces/**/WorkSets/*/Dgn/*
 !WorkSpaces/**/WorkSets/*/Dgn/.gitkeep
 WorkSpaces/**/WorkSets/*/out/*
 !WorkSpaces/**/WorkSets/*/out/.gitkeep
+
+# Local AI assistant instructions and working files.
+AGENTS.md
+AGENT.md
+CLAUDE.md
+GEMINI.md
+AI.md
+SKILL.md
+.agents/
+.codex/
+.claude/
+.cursor/
+.gemini/
+.cursorrules
+.cursorignore
+.github/copilot-instructions.md
+.github/instructions/
+.aider*
+
+# Internal NCAD working documents are not configuration resources.
+Organization-Civil/LVA/Documentation/

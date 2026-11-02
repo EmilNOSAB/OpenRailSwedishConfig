@@ -180,30 +180,49 @@ try {
     Write-TestFile (Join-Path $lvaDest $stockItemTypes) 'previous stock item types'
     Write-TestFile (Join-Path $lvaDest 'WorkSpaces\MyProject\drawing.dgn') 'keep project data'
     [void](Installera-Filer $lvaSource $lvaDest)
-    Assert (Test-Path -LiteralPath (Join-Path $lvaDest $stockCell)) 'Incomplete replacement never retires stock LVA'
+    Assert (Test-Path -LiteralPath (Join-Path $lvaDest $stockCell)) 'NCAD installation preserves existing LVA cells'
     foreach ($code in @('BANA', 'BELYSNING', 'KANALISATION', 'KONTAKTLEDNING', 'LSP', 'TELE')) {
         Write-TestFile (Join-Path $lvaSource ('Organization-Civil\LVA\Dgnlib\NCAD-OR-STANDARDS-{0}.dgnlib' -f $code)) 'new standards'
         Write-TestFile (Join-Path $lvaSource ('Organization-Civil\LVA\Cell\2D\NCAD-OR-CELL2D-{0}.cel' -f $code)) 'new 2D cells'
         Write-TestFile (Join-Path $lvaSource ('Organization-Civil\LVA\Cell\3D\NCAD-OR-CELL3D-{0}.cel' -f $code)) 'new 3D cells'
     }
     $lvaInstall = Installera-Filer $lvaSource $lvaDest
-    Assert (-not (Test-Path -LiteralPath (Join-Path $lvaDest $stockCell))) 'Complete LVA replacement removes stock cells'
-    Assert (-not (Test-Path -LiteralPath (Join-Path $lvaDest $stockItemTypes))) 'Complete LVA replacement removes stock Item Types'
-    Assert ([IO.File]::ReadAllText((Join-Path $lvaInstall.Backup $stockCell)) -eq 'previous stock cells') 'Retired stock library is backed up'
-    Assert ([IO.File]::ReadAllText((Join-Path $lvaDest 'WorkSpaces\MyProject\drawing.dgn')) -eq 'keep project data') 'LVA migration preserves project files'
-    Assert ((Installera-Filer $lvaSource $lvaDest).Files -eq 0) 'Repeated LVA migration makes no further changes'
+    Assert ([IO.File]::ReadAllText((Join-Path $lvaDest $stockCell)) -eq 'previous stock cells') 'Complete NCAD package preserves existing LVA cells'
+    Assert ([IO.File]::ReadAllText((Join-Path $lvaDest $stockItemTypes)) -eq 'previous stock item types') 'Complete NCAD package preserves existing LVA Item Types'
+    Assert ([IO.File]::ReadAllText((Join-Path $lvaDest 'WorkSpaces\MyProject\drawing.dgn')) -eq 'keep project data') 'LVA installation preserves project files'
+    Assert ((Installera-Filer $lvaSource $lvaDest).Files -eq 0) 'Repeated LVA installation makes no further changes'
 
-    # A failure after one retirement restores both the retired file and copies.
+    # The student package must install ConnectConfiguration LVA alongside NCAD,
+    # including resources that an older installer removed.
+    $connectResources = @(
+        $stockCell, $stockItemTypes,
+        'Organization-Civil\Swedish Standards\Cell\LV Assets Annotations.cel',
+        'Organization-Civil\Swedish Standards\Cell\LV Assets Plan.cel',
+        'Organization-Civil\Swedish Standards\Cell\LV Assets Sch.cel',
+        'Organization-Civil\Swedish Standards\Dgnlib\Feature Definitions\Rail\LVA Rail Settings Features Annotations Levels Elem Temp Metric.dgnLib',
+        'Organization-Civil\Swedish Standards\Dgnlib\Item Types\LV_Status.xlsx'
+    )
+    foreach ($relative in $connectResources) {
+        Write-TestFile (Join-Path $lvaSource $relative) ('ConnectConfiguration: ' + $relative)
+    }
+    $connectInstall = Installera-Filer $lvaSource $lvaDest
+    foreach ($relative in $connectResources) {
+        Assert ([IO.File]::ReadAllText((Join-Path $lvaDest $relative)) -eq ('ConnectConfiguration: ' + $relative)) ('ConnectConfiguration LVA survives installation: ' + $relative)
+    }
+    Assert ([IO.File]::ReadAllText((Join-Path $connectInstall.Backup $stockCell)) -eq 'previous stock cells') 'Updated LVA cell library is backed up'
+    Assert ((Installera-Filer $lvaSource $lvaDest).Files -eq 0) 'Repeated combined LVA installation makes no further changes'
+
+    # A locked LVA resource rolls back earlier copies and replacements.
     $lvaRollback = Join-Path $testRoot 'lva-rollback'
     $lockedCell = 'Organization-Civil\Swedish Standards\Cell\LV Assets Annotations.cel'
     Write-TestFile (Join-Path $lvaRollback $stockCell) 'restore these cells'
     Write-TestFile (Join-Path $lvaRollback $lockedCell) 'locked library'
     $lock = [IO.File]::Open((Join-Path $lvaRollback $lockedCell), [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
     try {
-        Assert-Throws { Installera-Filer $lvaSource $lvaRollback } 'Locked stock library fails the migration'
+        Assert-Throws { Installera-Filer $lvaSource $lvaRollback } 'Locked LVA library fails the update'
     } finally { $lock.Dispose() }
-    Assert ([IO.File]::ReadAllText((Join-Path $lvaRollback $stockCell)) -eq 'restore these cells') 'Migration rollback restores an already retired stock library'
-    Assert (-not (Test-Path -LiteralPath (Join-Path $lvaRollback 'Organization-Civil\LVA.cfg'))) 'Migration rollback removes newly copied files'
+    Assert ([IO.File]::ReadAllText((Join-Path $lvaRollback $stockCell)) -eq 'restore these cells') 'LVA rollback restores an overwritten library'
+    Assert (-not (Test-Path -LiteralPath (Join-Path $lvaRollback 'Organization-Civil\LVA.cfg'))) 'LVA rollback removes newly copied files'
 
     $rollbackSource = Join-Path $testRoot 'rollback-source'
     $rollbackDest = Join-Path $testRoot 'rollback-destination'

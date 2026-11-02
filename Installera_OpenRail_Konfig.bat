@@ -272,52 +272,24 @@ function Installera-Filer([string]$Kalla, [string]$Mal) {
             [IO.File]::Copy($fil.FullName, $dest, $true)
         }
 
-        # Pensionera bara de levererade standard-LVA-filerna, och endast när
-        # paketet innehåller hela ersättningen. Övriga extra filer behålls.
-        $lvaKomplett = [IO.File]::Exists((Join-Path $kallRot 'Organization-Civil\LVA.cfg'))
-        foreach ($kod in @('BANA', 'BELYSNING', 'KANALISATION', 'KONTAKTLEDNING', 'LSP', 'TELE')) {
-            foreach ($relativ in @(
-                ('Organization-Civil\LVA\Dgnlib\NCAD-OR-STANDARDS-{0}.dgnlib' -f $kod),
-                ('Organization-Civil\LVA\Cell\2D\NCAD-OR-CELL2D-{0}.cel' -f $kod),
-                ('Organization-Civil\LVA\Cell\3D\NCAD-OR-CELL3D-{0}.cel' -f $kod)
-            )) {
-                if (-not [IO.File]::Exists((Join-Path $kallRot $relativ))) { $lvaKomplett = $false }
-            }
-        }
-        if ($lvaKomplett) {
-            $pensionerade = @(
-                'Organization-Civil\Swedish Standards\Cell\LV Assets 3D.cel',
-                'Organization-Civil\Swedish Standards\Cell\LV Assets Annotations.cel',
-                'Organization-Civil\Swedish Standards\Cell\LV Assets Plan.cel',
-                'Organization-Civil\Swedish Standards\Cell\LV Assets Sch.cel',
-                'Organization-Civil\Swedish Standards\Dgnlib\Feature Definitions\Rail\LV Assets Item Types.dgnLib',
-                'Organization-Civil\Swedish Standards\Dgnlib\Feature Definitions\Rail\LVA Rail Settings Features Annotations Levels Elem Temp Metric.dgnLib',
-                'Organization-Civil\Swedish Standards\Dgnlib\Item Types\LV_Status.xlsx'
-            )
-            foreach ($relativ in $pensionerade) {
-                $dest = Join-Path $malRot $relativ
-                if (-not [IO.File]::Exists($dest)) { continue }
-                $kontroll = $dest
-                while ($kontroll -and $kontroll.Length -ge $malRot.TrimEnd('\').Length) {
-                    if (((Get-Item -LiteralPath $kontroll -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) {
-                        throw ('Målet innehåller en länk: ' + $kontroll)
-                    }
-                    $kontroll = [IO.Path]::GetDirectoryName($kontroll)
-                }
-                $backup = Join-Path $backupRot $relativ
-                [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($backup))
-                [IO.File]::Copy($dest, $backup, $false)
-                [IO.File]::Delete($dest)
-                $journal.Add([pscustomobject]@{ Destination = $dest; Backup = $backup })
-            }
-        }
+        # Behåll LVA från ConnectConfiguration tillsammans med NCAD-biblioteken.
     } catch {
         $fel = $_
+        $rollbackFel = New-Object 'System.Collections.Generic.List[string]'
         for ($i = $journal.Count - 1; $i -ge 0; $i--) {
             $rad = $journal[$i]
-            if ($rad.Backup) { [IO.File]::Copy($rad.Backup, $rad.Destination, $true) }
-            elseif ([IO.File]::Exists($rad.Destination)) { [IO.File]::Delete($rad.Destination) }
+            try {
+                if ($rad.Backup) {
+                    # En låst fil kan ha stoppat kopieringen innan den ändrades.
+                    # Hoppa då över omskrivning så att tidigare filer återställs.
+                    if ([IO.File]::Exists($rad.Destination) -and
+                        (Get-FileHash -LiteralPath $rad.Destination -Algorithm SHA256 -ErrorAction Stop).Hash -eq
+                        (Get-FileHash -LiteralPath $rad.Backup -Algorithm SHA256 -ErrorAction Stop).Hash) { continue }
+                    [IO.File]::Copy($rad.Backup, $rad.Destination, $true)
+                } elseif ([IO.File]::Exists($rad.Destination)) { [IO.File]::Delete($rad.Destination) }
+            } catch { $rollbackFel.Add($rad.Destination + ': ' + $_.Exception.Message) }
         }
+        if ($rollbackFel.Count) { throw ($fel.Exception.Message + ' Återställning misslyckades för: ' + ($rollbackFel -join '; ')) }
         throw $fel
     }
     return [pscustomobject]@{ Files = $journal.Count; Backup = $(if ([IO.Directory]::Exists($backupRot)) { $backupRot } else { $null }) }
